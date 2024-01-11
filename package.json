@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "wds --node-resolve --open --watch",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "repository": {
     "type": "git",
@@ -17,6 +20,31 @@
   },
   "homepage": "https://github.com/jeancarlos/learning-web-component#readme",
   "dependencies": {
-    "lit": "^3.1.0"
+    "lit": "^3.1.1"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^2.0.1",
+    "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.0",
+    "@storybook/addon-essentials": "^7.6.7",
+    "@storybook/addon-links": "^7.6.7",
+    "@storybook/addon-mdx-gfm": "^7.6.7",
+    "@storybook/blocks": "^7.6.7",
+    "@storybook/test": "^7.6.7",
+    "@storybook/web-components": "^7.6.7",
+    "@storybook/web-components-webpack5": "^7.6.7",
+    "esbuild": "^0.19.11",
+    "esbuild-plugin-minify-html-literals": "^1.0.6",
+    "eslint-plugin-lit-a11y": "^4.1.1",
+    "extract-loader": "^4.0.3",
+    "jest": "^29.7.0",
+    "lit-analyzer": "^2.0.3",
+    "lit-scss-loader": "^2.0.1",
+    "prettier": "^3.1.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "rimraf": "^5.0.5",
+    "storybook": "^7.6.7",
+    "ts-lit-plugin": "^2.0.2",
+    "typescript": "^5.3.3"
   }
 }
