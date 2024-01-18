@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "web-test-runner test/**/*.test.js --node-resolve",
+    "test": "web-test-runner src/stories/**/*.test.js --node-resolve",
     "start": "wds --node-resolve --open --watch",
     "storybook": "storybook dev -p 6006",
     "test:storybook": "test-storybook",
