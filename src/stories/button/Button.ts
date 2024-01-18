@@ -1,6 +1,7 @@
-import { html } from 'lit';
-import { styleMap } from 'lit/directives/style-map.js';
-import './button.css';
+import { html } from 'lit'
+import { styleMap } from 'lit/directives/style-map.js'
+import './button.css'
+
 
 export interface ButtonProps {
   /**
@@ -24,20 +25,23 @@ export interface ButtonProps {
    */
   onClick?: () => void;
 }
+
+
 /**
  * Primary UI component for user interaction
  */
-export const Button = ({ primary, backgroundColor, size, label, onClick }: ButtonProps) => {
-  const mode = primary ? 'storybook-button--primary' : 'storybook-button--secondary';
+const Button = ({ primary, backgroundColor, size, label, onClick }: ButtonProps) => {
+  const mode = primary ? 'storybook-button--primary' : 'storybook-button--secondary'
 
   return html`
     <button
-      type="button"
       class=${['storybook-button', `storybook-button--${size || 'medium'}`, mode].join(' ')}
       style=${styleMap({ backgroundColor })}
       @click=${onClick}
     >
       ${label}
     </button>
-  `;
-};
+  `
+}
+
+export default Button
