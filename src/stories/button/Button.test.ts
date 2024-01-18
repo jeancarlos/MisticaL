@@ -1,9 +1,9 @@
 import { html, fixture, expect } from '@open-wc/testing'
-import Button from './'
+import Button from './Button'
 
 describe('Button', () => {
-    it('has a default title "Hey there" and counter 5', async () => {
-        const Button = await fixture(html` <Button label="teste"></button>`)
+    it('teste button', async () => {
+        const Button = await fixture(html` <Button label="teste"></Button>`)
 
         expect(Button).to.equal('teste')
     })
