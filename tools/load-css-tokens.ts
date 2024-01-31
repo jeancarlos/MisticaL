@@ -8,26 +8,26 @@ const paths = [
   },
   {
     name: DesignSystemKeys.MovistarLegacy,
-    path: '/submodulesmistica-design/tokens/movistar-legacy.json',
+    path: '/submodules/mistica-design/tokens/movistar-legacy.json',
   },
   {
     name: DesignSystemKeys.Movistar,
-    path: '/submodulesmistica-design/tokens/movistar.json',
+    path: '/submodules/mistica-design/tokens/movistar.json',
   },
   { name: DesignSystemKeys.O2, path:
-    '/submodulesmistica-design/tokens/o2.json'
+    '/submodules/mistica-design/tokens/o2.json'
   },
   {
     name: DesignSystemKeys.Telefonica,
-    path: '/submodulesmistica-design/tokens/telefonica.json',
+    path: '/submodules/mistica-design/tokens/telefonica.json',
   },
   {
     name: DesignSystemKeys.VivoNew,
-    path: '/submodulesmistica-design/tokens/vivo-new.json',
+    path: '/submodules/mistica-design/tokens/vivo-new.json',
   },
   {
     name: DesignSystemKeys.Vivo,
-    path: '/submodulesmistica-design/tokens/vivo.json',
+    path: '/submodules/mistica-design/tokens/vivo.json',
   },
 ];
 
