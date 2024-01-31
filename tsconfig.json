@@ -22,7 +22,8 @@
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "inlineSources": true,
-    "types": ["node"]
+    "types": ["node"],
+    "rootDir": "./packages",
   },
   "include": ["**/*.ts", "**/*.d.ts"],
 }
