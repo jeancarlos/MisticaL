@@ -27,7 +27,7 @@ async function loadJson(key: DesignSystemKeys): Promise<DesignSystem> {
   }
 }
 
-export async function loadCssTokens(): Promise<{ [key: string]: DesignSystem }> {
+export async function loadCssTokens(): Promise<{ [key in DesignSystemKeys]?: DesignSystem }> {
   const allDesigns: { [key: string]: DesignSystem } = {};
 
   await Promise.all(
