@@ -1,5 +1,5 @@
+import DesignSystem from './types/design-system';
 import { DesignSystemKeys } from './types/design-system-keys';
-import DesignSystem from './design-system';
 
 const paths = [
   {
@@ -31,7 +31,6 @@ const paths = [
   },
 ];
 
-let designs: { [key in DesignSystemKeys]?: DesignSystem } = {};
 
 async function load(key: DesignSystemKeys): Promise<DesignSystem> {
   const filePath = paths.find(path => path.name === key)?.path;
@@ -42,9 +41,7 @@ async function load(key: DesignSystemKeys): Promise<DesignSystem> {
   try {
     const response = await fetch(filePath);
     const jsonData = await response.json();
-    const design = new DesignSystem(jsonData);
-    designs[key] = design;
-    return design;
+    return jsonData;
   } catch (error) {
     console.error(`Error loading design system ${key}:`, error);
     throw error;
