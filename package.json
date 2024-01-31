@@ -5,10 +5,11 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "start": "web-dev-server --node-resolve --watch --app-index demo/index.html --open",
+    "build": "tsc",
     "test": "web-test-runner packages/**/*.test.ts --node-resolve --esbuild-target auto",
     "test:coverage": "web-test-runner packages/**/*.test.ts --node-resolve --esbuild-target auto --coverage",
     "test:watch": "web-test-runner packages/**/*.test.ts --node-resolve --esbuild-target auto --watch",
-    "start": "web-dev-server --node-resolve --watch --app-index demo/index.html --open",
     "start:storybook": "web-dev-server --config .storybook/server.config.mjs dev -p 6006",
     "test:storybook": "test-storybook",
     "build:storybook": "storybook build"
