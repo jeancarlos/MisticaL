@@ -1,39 +1,18 @@
 import DesignSystem from './types/design-system';
 import { DesignSystemKeys } from './types/design-system-keys';
 
-const paths = [
-  {
-    name: DesignSystemKeys.Blau,
-    path: '/submodules/mistica-design/tokens/blau.json',
-  },
-  {
-    name: DesignSystemKeys.MovistarLegacy,
-    path: '/submodules/mistica-design/tokens/movistar-legacy.json',
-  },
-  {
-    name: DesignSystemKeys.Movistar,
-    path: '/submodules/mistica-design/tokens/movistar.json',
-  },
-  { name: DesignSystemKeys.O2, path:
-    '/submodules/mistica-design/tokens/o2.json'
-  },
-  {
-    name: DesignSystemKeys.Telefonica,
-    path: '/submodules/mistica-design/tokens/telefonica.json',
-  },
-  {
-    name: DesignSystemKeys.VivoNew,
-    path: '/submodules/mistica-design/tokens/vivo-new.json',
-  },
-  {
-    name: DesignSystemKeys.Vivo,
-    path: '/submodules/mistica-design/tokens/vivo.json',
-  },
-];
+const paths: { [key in DesignSystemKeys]: string } = {
+  [DesignSystemKeys.Blau]: '/submodules/mistica-design/tokens/blau.json',
+  [DesignSystemKeys.MovistarLegacy]: '/submodules/mistica-design/tokens/movistar-legacy.json',
+  [DesignSystemKeys.Movistar]: '/submodules/mistica-design/tokens/movistar.json',
+  [DesignSystemKeys.O2]: '/submodules/mistica-design/tokens/o2.json',
+  [DesignSystemKeys.Telefonica]: '/submodules/mistica-design/tokens/telefonica.json',
+  [DesignSystemKeys.VivoNew]: '/submodules/mistica-design/tokens/vivo-new.json',
+  [DesignSystemKeys.Vivo]: '/submodules/mistica-design/tokens/vivo.json',
+};
 
-
-async function load(key: DesignSystemKeys): Promise<DesignSystem> {
-  const filePath = paths.find(path => path.name === key)?.path;
+async function loadJson(key: DesignSystemKeys): Promise<DesignSystem> {
+  const filePath = paths[key];
   if (!filePath) {
     throw new Error(`Design system not found: ${key}`);
   }
@@ -48,13 +27,13 @@ async function load(key: DesignSystemKeys): Promise<DesignSystem> {
   }
 }
 
-export async function loadAll(): Promise<{ [key: string]: DesignSystem }> {
+export async function loadCssTokens(): Promise<{ [key: string]: DesignSystem }> {
   const allDesigns: { [key: string]: DesignSystem } = {};
 
   await Promise.all(
-    paths.map(async ({ name }) => {
-      const design = await load(name);
-      allDesigns[name] = design;
+    Object.keys(paths).map(async (key) => {
+      const design = await loadJson(key as DesignSystemKeys);
+      allDesigns[key] = design;
     })
   );
 

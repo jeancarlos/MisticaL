@@ -1,11 +1,11 @@
 import { html, css, LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
-import { loadAll } from '../../tools/load-css-tokens';
+import { loadCssTokens } from '../../tools/load-css-tokens';
 
 export class CounterWebComponent extends LitElement {
   override async connectedCallback() {
     super.connectedCallback();
-    const ds = await loadAll();
+    const ds = await loadCssTokens();
 
     console.log(ds)
   }
