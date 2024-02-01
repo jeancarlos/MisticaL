@@ -1,15 +1,11 @@
 import { html, css, LitElement } from 'lit';
-import { property } from 'lit/decorators.js';
+import { customElement, property } from 'lit/decorators.js';
 import { loadCssTokens } from '../../tools/load-css-tokens';
 
+@customElement('counter-web-component')
 export class CounterWebComponent extends LitElement {
-  override async connectedCallback() {
-    super.connectedCallback();
-    const ds = await loadCssTokens();
-
-    console.log(ds)
-  }
-
+  @property({ type: String }) header = 'Hey there';
+  @property({ type: Number }) counter = 5;
 
   static override styles = css`
     :host {
@@ -19,9 +15,12 @@ export class CounterWebComponent extends LitElement {
     }
   `;
 
-  @property({ type: String }) header = 'Hey there';
+  override async connectedCallback() {
+    super.connectedCallback();
+    const ds = await loadCssTokens();
 
-  @property({ type: Number }) counter = 5;
+    console.log(ds)
+  }
 
   __increment() {
     this.counter += 1;
@@ -34,5 +33,3 @@ export class CounterWebComponent extends LitElement {
     `;
   }
 }
-
-window.customElements.define('counter-web-component', CounterWebComponent);
