@@ -1,9 +1,14 @@
 import { html, css, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { loadCssTokens } from '../../tools/load-css-tokens';
+import { consume } from '@lit/context';
+import { themeContext } from '../../tools/theme-provider';
+import DesignSystem from '../../tools/types/design-system';
 
 @customElement('counter-web-component')
 export class CounterWebComponent extends LitElement {
+  @consume({ context: themeContext, subscribe: true })
+  theme: DesignSystem | undefined;
+
   @property({ type: String }) header = 'Hey there';
   @property({ type: Number }) counter = 5;
 
@@ -17,9 +22,7 @@ export class CounterWebComponent extends LitElement {
 
   override async connectedCallback() {
     super.connectedCallback();
-    const ds = await loadCssTokens();
-
-    console.log(ds)
+    console.log('theme', this.theme);
   }
 
   __increment() {
