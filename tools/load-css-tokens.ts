@@ -11,7 +11,7 @@ const paths: { [key in DesignSystemKeys]: string } = {
   [DesignSystemKeys.Vivo]: '/submodules/mistica-design/tokens/vivo.json',
 };
 
-export async function loadJson(key: DesignSystemKeys): Promise<DesignSystem> {
+export async function loadCssTokens(key: DesignSystemKeys): Promise<DesignSystem> {
   const filePath = paths[key];
   if (!filePath) {
     throw new Error(`Design system not found: ${key}`);
@@ -26,13 +26,12 @@ export async function loadJson(key: DesignSystemKeys): Promise<DesignSystem> {
     throw error;
   }
 }
-
-export async function loadCssTokens(): Promise<{ [key in DesignSystemKeys]?: DesignSystem }> {
+export async function loadAllCssTokens(): Promise<{ [key in DesignSystemKeys]?: DesignSystem }> {
   const allDesigns: { [key: string]: DesignSystem } = {};
 
   await Promise.all(
     Object.keys(paths).map(async (key) => {
-      const design = await loadJson(key as DesignSystemKeys);
+      const design = await loadCssTokens(key as DesignSystemKeys);
       allDesigns[key] = design;
     })
   );
