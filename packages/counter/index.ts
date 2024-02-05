@@ -20,9 +20,9 @@ export class CounterWebComponent extends ThemeProvider {
   }
 
   override render() {
-    console.log(this.theme.dark.backgroundBrand.value)
+    console.log(this.currentTheme)
     return html`
-      <h1>${this.theme.dark.appBarBackground.value}</h1>
+      <h1>${this.currentTheme.dark.appBarBackground.value}</h1>
       <h2>${this.header} Nr. ${this.counter}!</h2>
       <button @click=${this.__increment}>increment</button>
     `;
