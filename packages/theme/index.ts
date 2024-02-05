@@ -1,13 +1,14 @@
 import { LitElement, css, html } from 'lit';
-import { loadCssTokens } from './load-css-tokens';
-import { DesignSystemKeys } from './types/design-system-keys';
-import DesignSystem from './types/design-system';
 import { customElement, state } from 'lit/decorators.js';
+import Theme from './types/theme';
+import { ThemeKeys } from './types/theme-keys';
+import { loadCssTokens } from '../../utils/load-css-tokens';
 
-@customElement('theme-provider')
-export class ThemeProvider extends LitElement {
+
+@customElement('theme-web-component')
+export class ThemeWebComponent extends LitElement {
   @state()
-  private theme!: DesignSystem;
+  private theme!: Theme;
 
   public get currentTheme() {
     return this.theme;
@@ -15,7 +16,7 @@ export class ThemeProvider extends LitElement {
 
   override async connectedCallback() {
     super.connectedCallback();
-    this.theme = await loadCssTokens(DesignSystemKeys.Movistar);
+    this.theme = await loadCssTokens(ThemeKeys.Movistar);
     this.replacePaletteValuesInTheme();
   }
 
@@ -30,7 +31,7 @@ export class ThemeProvider extends LitElement {
     });
   }
 
-  changeTheme(newTheme: DesignSystem) {
+  changeTheme(newTheme: Theme) {
     this.theme = newTheme;
     this.replacePaletteValuesInTheme();
     this.requestUpdate();

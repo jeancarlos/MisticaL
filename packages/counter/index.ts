@@ -1,9 +1,9 @@
 import { html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { ThemeProvider } from '../../tools/theme-provider';
+import { ThemeWebComponent } from  '../theme';
 
 @customElement('counter-web-component')
-export class CounterWebComponent extends ThemeProvider {
+export class CounterWebComponent extends ThemeWebComponent {
   @property({ type: String }) header = 'Hey there';
   @property({ type: Number }) counter = 5;
 
