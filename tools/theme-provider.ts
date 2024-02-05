@@ -24,21 +24,18 @@ export class ThemeProvider extends LitElement {
     this.theme = theme;
     this.palette = global.palette;
 
-    for (const key in this.theme.dark) {
-      const match = this.theme.dark[key].value.match(/\{palette\.(\w+)\}/);
-      if (match) {
-        this.theme.dark[key].value = this.palette[match[1]].value;
-      }
-    }
-
-    for (const key in this.theme.light) {
-      const match = this.theme.light[key].value.match(/\{palette\.(\w+)\}/);
-      if (match) {
-        this.theme.light[key].value = this.palette[match[1]].value;
-      }
-    }
+    this.updateTheme(this.theme.dark);
+    this.updateTheme(this.theme.light);
   }
 
+  updateTheme(theme: { [key: string]: { value: string } }) {
+    Object.keys(theme).forEach(key => {
+      const match = theme[key].value.match(/\{palette\.(\w+)\}/);
+      if (match && match[1] in this.palette) {
+        theme[key].value = this.palette[match[1]].value;
+      }
+    });
+  }
 
   changeDesignSystem(newDesignSystem: DesignSystem) {
     this.designSystem = newDesignSystem;
