@@ -8,5 +8,5 @@ export default interface DesignSystem {
   dark: ComponentsColor;
   radius: Radius;
   text: Text;
-  global: { Palette: Palette };
+  global: { palette: Palette };
 }
