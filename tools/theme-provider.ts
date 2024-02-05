@@ -2,43 +2,37 @@ import { LitElement, css, html } from 'lit';
 import { loadCssTokens } from './load-css-tokens';
 import { DesignSystemKeys } from './types/design-system-keys';
 import DesignSystem from './types/design-system';
-import { customElement, property } from 'lit/decorators.js';
-import Theme from './types/theme';
-import Palette from './types/palette';
+import { customElement, state } from 'lit/decorators.js';
 
 @customElement('theme-provider')
 export class ThemeProvider extends LitElement {
-  @property({ type: Object })
-  designSystem!: DesignSystem;
+  @state()
+  private theme!: DesignSystem;
 
-  @property({ type: Object })
-  theme!: Theme;
-
-  @property({ type: Object })
-  palette!: Palette;
+  public get currentTheme() {
+    return this.theme;
+  }
 
   override async connectedCallback() {
     super.connectedCallback();
-    this.designSystem = await loadCssTokens(DesignSystemKeys.Movistar);
-    const { global, ...theme } = this.designSystem;
-    this.theme = theme;
-    this.palette = global.palette;
-
-    this.updateTheme(this.theme.dark);
-    this.updateTheme(this.theme.light);
+    this.theme = await loadCssTokens(DesignSystemKeys.Movistar);
+    this.replacePaletteValuesInTheme();
   }
 
-  updateTheme(theme: { [key: string]: { value: string } }) {
-    Object.keys(theme).forEach(key => {
-      const match = theme[key].value.match(/\{palette\.(\w+)\}/);
-      if (match && match[1] in this.palette) {
-        theme[key].value = this.palette[match[1]].value;
+  private replacePaletteValuesInTheme(): void {
+    ['dark', 'light'].forEach((themeType) => {
+      for (const key in this.theme[themeType]) {
+        const match = this.theme[themeType][key].value.match(/\{palette\.(\w+)\}/);
+        if (match) {
+          this.theme[themeType][key].value = this.theme.global.palette[match[1]].value;
+        }
       }
     });
   }
 
-  changeDesignSystem(newDesignSystem: DesignSystem) {
-    this.designSystem = newDesignSystem;
+  changeTheme(newTheme: DesignSystem) {
+    this.theme = newTheme;
+    this.replacePaletteValuesInTheme();
     this.requestUpdate();
   }
 
