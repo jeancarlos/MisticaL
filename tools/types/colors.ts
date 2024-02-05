@@ -1,10 +1,11 @@
 export interface Color {
   value: string;
   type: string;
-  description: string;
+  description?: string;
 }
 
 export interface ComponentsColor {
+  [key: string]: Color;
   background: Color;
   backgroundAlternative: Color;
   backgroundBrand: Color;

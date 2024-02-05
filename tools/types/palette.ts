@@ -1,6 +1,7 @@
 import { Color } from './colors';
 
 export default interface Palette {
+  [key: string]: Color;
   movistarBlue: Color;
   movistarBlue10: Color;
   movistarBlue20: Color;
