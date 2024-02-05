@@ -1,14 +1,9 @@
-import { html, css, LitElement } from 'lit';
+import { html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { consume } from '@lit/context';
-import { themeContext } from '../../tools/theme-provider';
-import DesignSystem from '../../tools/types/design-system';
+import { ThemeProvider } from '../../tools/theme-provider';
 
 @customElement('counter-web-component')
-export class CounterWebComponent extends LitElement {
-  @consume({ context: themeContext, subscribe: true })
-  theme: DesignSystem | undefined;
-
+export class CounterWebComponent extends ThemeProvider {
   @property({ type: String }) header = 'Hey there';
   @property({ type: Number }) counter = 5;
 
@@ -20,17 +15,14 @@ export class CounterWebComponent extends LitElement {
     }
   `;
 
-  override async connectedCallback() {
-    super.connectedCallback();
-    console.log('theme', this.theme);
-  }
-
   __increment() {
     this.counter += 1;
   }
 
   override render() {
+    console.log(this.theme.dark.backgroundBrand.value)
     return html`
+      <h1>${this.theme.dark.appBarBackground.value}</h1>
       <h2>${this.header} Nr. ${this.counter}!</h2>
       <button @click=${this.__increment}>increment</button>
     `;
