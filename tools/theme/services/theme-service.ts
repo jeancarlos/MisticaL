@@ -1,18 +1,16 @@
-import Token, { TokenType } from './types/token';
-import { Theme, ThemeType } from './types/theme';
-import TokensLoader from './tokens/loader';
+import ChangeThemeDTO from "../dtos/change-theme-dto";
+import TokensRepository from "../repositories/tokens-repository";
+import { Theme, ThemeType } from "../types/theme";
+import Token, { TokenType } from "../types/token";
 
 
-interface ChangeThemeDTO {
-  themeType?: ThemeType,
-  tokenType?: TokenType
-}
-interface IThemeManager {
+
+interface IThemeService {
   currentTheme: Theme;
   changeTheme({themeType, tokenType}: ChangeThemeDTO): Promise<Theme>;
 }
 
-export class ThemeManager implements IThemeManager {
+export class ThemeService implements IThemeService {
   private _currentTheme!: Theme;
 
   public get currentTheme() {
@@ -37,9 +35,9 @@ export class ThemeManager implements IThemeManager {
   static async build(
     tokenType: TokenType = TokenType.VivoNew,
     themeType: ThemeType = ThemeType.Light
-  ): Promise<ThemeManager> {
+  ): Promise<ThemeService> {
     const cssTokens = await this.validateAndLoadTokens(tokenType, themeType);
-    return new ThemeManager(cssTokens, themeType, tokenType);
+    return new ThemeService(cssTokens, themeType, tokenType);
   }
 
   private static async validateAndLoadTokens(tokenType: TokenType, themeType: ThemeType): Promise<Token> {
@@ -47,8 +45,8 @@ export class ThemeManager implements IThemeManager {
       throw new Error(`Invalid theme type. Must be one of ${Object.values(ThemeType).join(', ')}.`);
     }
 
-    const loader = await TokensLoader.getInstance();
-    const cssTokens = loader.get(tokenType);
+    const loader = await TokensRepository.getInstance();
+    const cssTokens = await loader.get(tokenType);
 
     if (!cssTokens) {
       throw new Error(`Invalid token type. Must be one of ${Object.values(TokenType).join(', ')}.`);
@@ -61,8 +59,7 @@ export class ThemeManager implements IThemeManager {
     themeType = themeType || this._currentTheme.themeType;
     tokenType = tokenType || this._currentTheme.tokenType;
 
-    const cssTokens = await ThemeManager.validateAndLoadTokens(tokenType, themeType);
-    console.log('changeTheme', cssTokens, themeType, tokenType)
+    const cssTokens = await ThemeService.validateAndLoadTokens(tokenType, themeType);
     this._currentTheme = this.createTheme(cssTokens, themeType, tokenType);
 
     return this.currentTheme;

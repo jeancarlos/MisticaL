@@ -2,6 +2,7 @@ import { html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { ThemeWebComponent } from  '../theme';
 import { ThemeType } from '../../tools/theme/types/theme';
+import { TokenType } from '../../tools/theme/types/token';
 
 @customElement('counter-web-component')
 export class CounterWebComponent extends ThemeWebComponent {
@@ -20,16 +21,26 @@ export class CounterWebComponent extends ThemeWebComponent {
     this.counter += 1;
 
     await this.toggleTheme()
+    await this.randomTokenType()
   }
 
   async toggleTheme() {
-    console.log('toggleTheme', this.theme.themeType)
-
     if (this.theme.themeType === ThemeType.Light) {
       await this.changeThemeType(ThemeType.Dark);
     } else {
       await this.changeThemeType(ThemeType.Light);
     }
+  }
+
+  async randomTokenType() {
+    const keys = Object.keys(TokenType);
+    const randomIndex = Math.floor(Math.random() * keys.length);
+    const randomKey = keys[randomIndex];
+    const randomTokenType = TokenType[randomKey as keyof typeof TokenType];
+
+    await this.changeTokenType(randomTokenType);
+
+    console.log(this.theme)
   }
 
   override render() {
