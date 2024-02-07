@@ -45,7 +45,7 @@ export class ThemeService implements IThemeService {
       throw new Error(`Invalid theme type. Must be one of ${Object.values(ThemeType).join(', ')}.`);
     }
 
-    const loader = await TokensRepository.getInstance();
+    const loader = TokensRepository.getInstance();
     const cssTokens = await loader.get(tokenType);
 
     if (!cssTokens) {

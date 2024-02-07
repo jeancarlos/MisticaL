@@ -7,7 +7,7 @@ class TokensRepository {
 
   private constructor() {}
 
-  static async getInstance(): Promise<TokensRepository> {
+  static getInstance(): TokensRepository {
     if (!TokensRepository._instance) {
       TokensRepository._instance = new TokensRepository();
     }
