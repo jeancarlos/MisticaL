@@ -26,9 +26,9 @@ export class CounterWebComponent extends ThemeWebComponent {
 
   async toggleTheme() {
     if (this.theme.themeType === ThemeType.Light) {
-      await this.changeThemeType(ThemeType.Dark);
+      await this.changeTheme({ themeType: ThemeType.Dark});
     } else {
-      await this.changeThemeType(ThemeType.Light);
+      await this.changeTheme({ themeType: ThemeType.Light});
     }
   }
 
@@ -38,7 +38,7 @@ export class CounterWebComponent extends ThemeWebComponent {
     const randomKey = keys[randomIndex];
     const randomTokenType = TokenType[randomKey as keyof typeof TokenType];
 
-    await this.changeTokenType(randomTokenType);
+    await this.changeTheme({ tokenType: randomTokenType });
 
     console.log(this.theme)
   }
