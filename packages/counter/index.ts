@@ -1,6 +1,7 @@
 import { html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { ThemeWebComponent } from  '../theme';
+import { ThemeType } from '../../tools/theme/types/theme';
 
 @customElement('counter-web-component')
 export class CounterWebComponent extends ThemeWebComponent {
@@ -15,15 +16,25 @@ export class CounterWebComponent extends ThemeWebComponent {
     }
   `;
 
-  __increment() {
+  async __increment() {
     this.counter += 1;
+
+    await this.toggleTheme()
+  }
+
+  async toggleTheme() {
+    console.log('toggleTheme', this.theme.themeType)
+
+    if (this.theme.themeType === ThemeType.Light) {
+      await this.changeThemeType(ThemeType.Dark);
+    } else {
+      await this.changeThemeType(ThemeType.Light);
+    }
   }
 
   override render() {
-    console.log('render', this.currentTheme)
-
     return html`
-      <h1>${this.currentTheme.componentsColor.appBarBackground.value}</h1>
+      <h1>${this.theme.componentsColor.appBarBackground.value}</h1>
       <h2>${this.header} Nr. ${this.counter}!</h2>
       <button @click=${this.__increment}>increment</button>
     `;

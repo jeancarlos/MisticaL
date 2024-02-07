@@ -1,42 +1,71 @@
-import { ComponentsColor } from './types/colors';
-import { Radius } from './types/radius';
-import Palette from './types/palette';
-import { Text } from './types/text';
-import { DesignSystemKeys } from './types/design-system-keys';
-import { loadDesignSystem } from './load-design-system';
-import { ITheme } from './types/theme';
-import { ThemeKeys } from './types/theme-keys';
+import Token, { TokenType } from './types/token';
+import { Theme, ThemeType } from './types/theme';
+import TokensLoader from './tokens/loader';
 
 
-export class Theme implements ITheme {
-  componentsColor: ComponentsColor;
-  radius: Radius;
-  text: Text;
-  palette: Palette;
+interface ChangeThemeDTO {
+  themeType?: ThemeType,
+  tokenType?: TokenType
+}
+interface IThemeManager {
+  currentTheme: Theme;
+  changeTheme({themeType, tokenType}: ChangeThemeDTO): Promise<Theme>;
+}
 
-  private constructor(componentsColor: ComponentsColor, radius: Radius, text: Text, palette: Palette) {
-    this.componentsColor = componentsColor;
-    this.radius = radius;
-    this.text = text;
-    this.palette = palette;
+export class ThemeManager implements IThemeManager {
+  private _currentTheme!: Theme;
+
+  public get currentTheme() {
+    return this._currentTheme;
+  }
+
+  private constructor(cssTokens: Token, themeType: ThemeType, tokenType: TokenType) {
+    this._currentTheme = this.createTheme(cssTokens, themeType, tokenType);
+  }
+
+  private createTheme(cssTokens: Token, themeType: ThemeType, tokenType: TokenType): Theme {
+    return {
+      themeType,
+      tokenType,
+      componentsColor: cssTokens[themeType],
+      radius: cssTokens.radius,
+      text: cssTokens.text,
+      palette: cssTokens.global.palette,
+    };
   }
 
   static async build(
-    themeKey: DesignSystemKeys = DesignSystemKeys.VivoNew,
-    themeType: ThemeKeys = ThemeKeys.Light
-    ): Promise<Theme> {
+    tokenType: TokenType = TokenType.VivoNew,
+    themeType: ThemeType = ThemeType.Light
+  ): Promise<ThemeManager> {
+    const cssTokens = await this.validateAndLoadTokens(tokenType, themeType);
+    return new ThemeManager(cssTokens, themeType, tokenType);
+  }
 
-    if (!Object.values(ThemeKeys).includes(themeType)) {
-      throw new Error(`Invalid theme type. Must be one of ${Object.values(ThemeKeys).join(', ')}.`);
+  private static async validateAndLoadTokens(tokenType: TokenType, themeType: ThemeType): Promise<Token> {
+    if (!Object.values(ThemeType).includes(themeType)) {
+      throw new Error(`Invalid theme type. Must be one of ${Object.values(ThemeType).join(', ')}.`);
     }
 
-    const theme = await loadDesignSystem(themeKey);
+    const loader = await TokensLoader.getInstance();
+    const cssTokens = loader.get(tokenType);
 
-    return new Theme(
-      theme[themeType],
-      theme.radius,
-      theme.text,
-      theme.global.palette,
-    );
+    if (!cssTokens) {
+      throw new Error(`Invalid token type. Must be one of ${Object.values(TokenType).join(', ')}.`);
+    }
+
+    return cssTokens;
   }
+
+  async changeTheme({ themeType, tokenType }: ChangeThemeDTO): Promise<Theme> {
+    themeType = themeType || this._currentTheme.themeType;
+    tokenType = tokenType || this._currentTheme.tokenType;
+
+    const cssTokens = await ThemeManager.validateAndLoadTokens(tokenType, themeType);
+    console.log('changeTheme', cssTokens, themeType, tokenType)
+    this._currentTheme = this.createTheme(cssTokens, themeType, tokenType);
+
+    return this.currentTheme;
+  }
+
 }

@@ -1,32 +1,42 @@
 import { LitElement, css, html } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
-import { DesignSystemKeys } from '../../tools/theme/types/design-system-keys';
-import { Theme } from '../../tools/theme/theme';
+import { Theme, ThemeType } from '../../tools/theme/types/theme';
+import { ThemeManager } from '../../tools/theme/theme';
+import { TokenType } from '../../tools/theme/types/token';
 
 @customElement('theme-web-component')
 export class ThemeWebComponent extends LitElement {
   @state()
-  private theme!: Theme;
+  private _theme!: Theme
+  private _service!: ThemeManager;
 
-  public get currentTheme() {
-    return this.theme;
+  public get theme() {
+    return this._theme;
   }
 
   constructor() {
     super();
-    Theme.build().then(theme => {
-      this.theme = theme;
+    ThemeManager.build().then(theme => {
+      this._theme = theme.currentTheme;
+      this._service = theme;
       this.requestUpdate();
     });
   }
 
-  async changeTheme(newTheme: DesignSystemKeys) {
-    this.theme = await Theme.build(newTheme);
-    console.log(this.theme)
+  async changeThemeType(theme: ThemeType) {
+    const newTheme = await this._service.changeTheme({ themeType: theme });
+    this._theme = newTheme
+    this.requestUpdate();
+  }
+
+  async changeTokenType(token: TokenType){
+    const newTheme = await this._service.changeTheme({ tokenType: token});
+    this._theme = newTheme
     this.requestUpdate();
   }
 
   static override styles = css`
+
   `;
 
   override render() {
