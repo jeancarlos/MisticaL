@@ -12,6 +12,22 @@ const paths: { [key in ThemeKeys]: string } = {
   [ThemeKeys.Vivo]: '/submodules/mistica-design/tokens/vivo.json',
 };
 
+
+function replacePaletteValues(theme: Theme): Theme {
+  const newTheme = JSON.parse(JSON.stringify(theme));
+
+  ['dark', 'light'].forEach((themeType) => {
+    for (const key in newTheme[themeType]) {
+      const match = newTheme[themeType][key].value.match(/\{palette\.(\w+)\}/);
+      if (match) {
+        newTheme[themeType][key].value = newTheme.global.palette[match[1]].value;
+      }
+    }
+  });
+
+  return newTheme;
+}
+
 export async function loadCssTokens(key: ThemeKeys): Promise<Theme> {
   const filePath = paths[key];
   if (!filePath) {
@@ -20,13 +36,16 @@ export async function loadCssTokens(key: ThemeKeys): Promise<Theme> {
 
   try {
     const response = await fetch(filePath);
-    const jsonData = await response.json();
-    return jsonData;
+    const jsonData = await response.json() as Theme;
+
+    const cssTokens = replacePaletteValues(jsonData);
+    return cssTokens
   } catch (error) {
     console.error(`Error loading design system ${key}:`, error);
     throw error;
   }
 }
+
 export async function loadAllCssTokens(): Promise<{ [key in ThemeKeys]?: Theme }> {
   const allDesigns: { [key: string]: Theme } = {};
 

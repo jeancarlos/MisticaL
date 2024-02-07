@@ -16,29 +16,15 @@ export class ThemeWebComponent extends LitElement {
 
   override async connectedCallback() {
     super.connectedCallback();
-    this.theme = await loadCssTokens(ThemeKeys.Movistar);
-    this.replacePaletteValuesInTheme();
-  }
-
-  private replacePaletteValuesInTheme(): void {
-    ['dark', 'light'].forEach((themeType) => {
-      for (const key in this.theme[themeType]) {
-        const match = this.theme[themeType][key].value.match(/\{palette\.(\w+)\}/);
-        if (match) {
-          this.theme[themeType][key].value = this.theme.global.palette[match[1]].value;
-        }
-      }
-    });
+    this.theme = await loadCssTokens(ThemeKeys.VivoNew);
   }
 
   changeTheme(newTheme: Theme) {
     this.theme = newTheme;
-    this.replacePaletteValuesInTheme();
     this.requestUpdate();
   }
 
   static override styles = css`
-    /* Use the theme to generate CSS */
   `;
 
   override render() {
