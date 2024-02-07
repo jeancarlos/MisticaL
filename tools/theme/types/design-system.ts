@@ -3,7 +3,7 @@ import { Radius } from './radius';
 import { Text } from './text';
 import Palette from './palette';
 
-export default interface Theme {
+export default interface DesignSystem {
   [key: string]: any;
   light: ComponentsColor;
   dark: ComponentsColor;

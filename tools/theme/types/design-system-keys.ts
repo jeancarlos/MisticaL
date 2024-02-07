@@ -1,4 +1,4 @@
-export enum ThemeKeys {
+export enum DesignSystemKeys {
   Blau = 'blau',
   MovistarLegacy = 'movistar-legacy',
   Movistar = 'movistar',
