@@ -4,7 +4,6 @@ import { Theme, ThemeType } from "../types/theme";
 import Token, { TokenType } from "../types/token";
 
 
-
 interface IThemeService {
   currentTheme: Theme;
   changeTheme({themeType, tokenType}: ChangeThemeDTO): Promise<Theme>;
