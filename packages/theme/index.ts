@@ -1,5 +1,5 @@
 import { LitElement, PropertyValueMap, html } from 'lit';
-import { customElement, state } from 'lit/decorators.js';
+import { customElement, property, state } from 'lit/decorators.js';
 import { Theme, ThemeType } from '../../tools/theme/types/theme';
 import { TokenType } from '../../tools/theme/types/token';
 import { ThemeService } from '../../tools/theme/services/theme-service';
@@ -11,6 +11,12 @@ interface ChangeThemeDTO {
 }
 @customElement('theme-web-component')
 export class ThemeWebComponent extends LitElement {
+  @property({ type: String, attribute: 'theme-type'})
+  themeType!: ThemeType;
+
+  @property({ type: String, attribute: 'token-type' })
+  tokenType!: TokenType;
+
   @state()
   private _theme!: Theme
   private _service!: ThemeService;
@@ -21,10 +27,11 @@ export class ThemeWebComponent extends LitElement {
 
   override connectedCallback() {
     super.connectedCallback();
-    ThemeService.build().then(theme => {
+    ThemeService.build(this.tokenType, this.themeType).then(theme => {
       this._theme = theme.currentTheme;
       this._service = theme;
       this.style.cssText = this.generateCssVariables();
+      console.log('connectedCallback', this._theme)
       this.requestUpdate();
     });
   }
@@ -35,6 +42,8 @@ export class ThemeWebComponent extends LitElement {
     if (_changedProperties.has('_theme')) {
       this.style.cssText = this.generateCssVariables();
     }
+
+    console.log('updated', this._theme)
   }
 
   private generateCssVariables(): string {
@@ -51,7 +60,6 @@ export class ThemeWebComponent extends LitElement {
     };
 
     processObject(this._theme);
-    console.log(cssVariables)
     return cssVariables;
   }
 

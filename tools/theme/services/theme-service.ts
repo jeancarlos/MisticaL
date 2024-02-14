@@ -32,8 +32,8 @@ export class ThemeService implements IThemeService {
   }
 
   static async build(
-    tokenType: TokenType = TokenType.VivoNew,
-    themeType: ThemeType = ThemeType.Light
+    tokenType: TokenType,
+    themeType: ThemeType
   ): Promise<ThemeService> {
     const cssTokens = await this.validateAndLoadTokens(tokenType, themeType);
     return new ThemeService(cssTokens, themeType, tokenType);

@@ -9,6 +9,7 @@ export class CounterWebComponent extends ThemeWebComponent {
   @property({ type: String }) header = 'Hey there';
   @property({ type: Number }) counter = 5;
 
+
   static override styles = css`
     :host {
       display: block;
@@ -16,13 +17,6 @@ export class CounterWebComponent extends ThemeWebComponent {
       color: var(--button-text-color, #000);
     }
   `;
-
-  async __increment() {
-    this.counter += 1;
-
-    await this.toggleTheme()
-    await this.randomTokenType()
-  }
 
   async toggleTheme() {
     if (this.theme.themeType === ThemeType.Light) {
@@ -39,15 +33,15 @@ export class CounterWebComponent extends ThemeWebComponent {
     const randomTokenType = TokenType[randomKey as keyof typeof TokenType];
 
     await this.changeTheme({ tokenType: randomTokenType });
-
-    console.log(this.theme)
   }
 
   override render() {
     return html`
+    <div>
       <h1>${this.theme.componentsColor.appBarBackground.value}</h1>
-      <h2>${this.header} Nr. ${this.counter}!</h2>
-      <button @click=${this.__increment}>increment</button>
+      <button @click=${this.toggleTheme}>Toggle Theme</button>
+      <button @click=${this.randomTokenType}>Random Token Type</button>
+    </div>
     `;
   }
 }
