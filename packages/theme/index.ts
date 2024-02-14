@@ -51,13 +51,14 @@ export class ThemeWebComponent extends LitElement {
     };
 
     processObject(this._theme);
-    console.log(cssVariables)
+    // console.log(cssVariables)
     return cssVariables;
   }
 
   async changeTheme({ themeType, tokenType }: ChangeThemeDTO) {
     const newTheme = await this._service.changeTheme({ themeType, tokenType });
     this._theme = newTheme
+    // console.log(  this._theme, 'tema')
     this.requestUpdate();
   }
 

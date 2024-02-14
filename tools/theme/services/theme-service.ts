@@ -6,7 +6,12 @@ import Token, { TokenType } from "../types/token";
 
 interface IThemeService {
   currentTheme: Theme;
-  changeTheme({themeType, tokenType}: ChangeThemeDTO): Promise<Theme>;
+  changeTheme({ themeType, tokenType }: ChangeThemeDTO): Promise<Theme>;
+}
+declare global {
+  interface Window {
+    themeService: ThemeService;
+  }
 }
 
 export class ThemeService implements IThemeService {
@@ -36,7 +41,10 @@ export class ThemeService implements IThemeService {
     themeType: ThemeType = ThemeType.Light
   ): Promise<ThemeService> {
     const cssTokens = await this.validateAndLoadTokens(tokenType, themeType);
-    return new ThemeService(cssTokens, themeType, tokenType);
+    const instance = new ThemeService(cssTokens, themeType, tokenType);
+    window.themeService = instance;
+
+    return instance;
   }
 
   private static async validateAndLoadTokens(tokenType: TokenType, themeType: ThemeType): Promise<Token> {
@@ -55,12 +63,12 @@ export class ThemeService implements IThemeService {
   }
 
   async changeTheme({ themeType, tokenType }: ChangeThemeDTO): Promise<Theme> {
+
     themeType = themeType || this._currentTheme.themeType;
     tokenType = tokenType || this._currentTheme.tokenType;
-
     const cssTokens = await ThemeService.validateAndLoadTokens(tokenType, themeType);
     this._currentTheme = this.createTheme(cssTokens, themeType, tokenType);
-
+    console.log(this.currentTheme, ' this.currentTheme')
     return this.currentTheme;
   }
 
