@@ -37,7 +37,7 @@ export class ButtonWebComponent extends ThemeWebComponent {
     return html`
       <h1>${this.theme.themeType}</h1>
       <h1>${this.theme.tokenType}</h1>
-      <button @click="${this.randomTokenType}">Change Theme</button>
+      <button @click="${this.randomTokenType}">Change Design System</button>
       <button @click="${this.toggleTheme}">Toggle Theme</button>
     `;
   }
