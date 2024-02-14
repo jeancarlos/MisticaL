@@ -5,11 +5,12 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "start": "web-dev-server --node-resolve --watch --app-index demo/index.html --open",
+    "build": "tsc",
     "test": "web-test-runner packages/**/*.test.ts --node-resolve --esbuild-target auto",
     "test:coverage": "web-test-runner packages/**/*.test.ts --node-resolve --esbuild-target auto --coverage",
     "test:watch": "web-test-runner packages/**/*.test.ts --node-resolve --esbuild-target auto --watch",
-    "start": "web-dev-server --node-resolve --watch --app-index demo/index.html --open",
-    "start:storybook": "web-dev-server --config .storybook/server.config.mjs dev -p 6006",
+    "start:storybook": "storybook dev -p 6006",
     "test:storybook": "test-storybook",
     "build:storybook": "storybook build"
   },
@@ -24,6 +25,7 @@
   },
   "homepage": "https://github.com/jeancarlos/learning-web-component#readme",
   "dependencies": {
+    "@lit/context": "^1.1.0",
     "lit": "^3.1.1"
   },
   "devDependencies": {
@@ -31,19 +33,31 @@
     "@storybook/addons": "^7.6.10",
     "@storybook/html": "^7.6.10",
     "@storybook/theming": "^7.6.10",
+    "@storybook/addon-essentials": "^7.6.12",
+    "@storybook/addon-links": "^7.6.12",
+    "@storybook/blocks": "^7.6.12",
     "@storybook/web-components": "^7.6.10",
+    "@storybook/web-components-vite": "^7.6.12",
     "@stylistic/eslint-plugin": "^1.5.4",
     "@types/eslint": "^8",
     "@types/node": "^20.11.10",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
     "@web/dev-server": "^0.4.1",
-    "@web/dev-server-esbuild": "^1.0.1",
-    "@web/dev-server-storybook": "^2.0.1",
-    "@web/storybook-framework-web-components": "^0.1.1",
+    "@web/dev-server-esbuild": "^1.0.2",
     "@web/test-runner": "^0.18.0",
     "eslint": "^8.56.0",
+    "eslint-plugin-storybook": "^0.6.15",
     "prettier": "^3.2.4",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
     "storybook": "^7.6.10",
     "storybook-addon-themes": "^6.1.0",
     "typescript": "^5.3.3"
+  },
+  "eslintConfig": {
+    "extends": [
+      "plugin:storybook/recommended"
+    ]
   }
 }
