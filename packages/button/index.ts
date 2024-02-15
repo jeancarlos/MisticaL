@@ -15,7 +15,6 @@ export class ButtonWebComponent extends ThemeWebComponent {
       cursor: pointer;
     }
   `;
-
   async randomTokenType() {
     const keys = Object.keys(TokenType);
     const randomIndex = Math.floor(Math.random() * keys.length);
@@ -32,7 +31,12 @@ export class ButtonWebComponent extends ThemeWebComponent {
       await this.changeTheme({ themeType: ThemeType.Light});
     }
   }
-
+ override connectedCallback(): void {
+    super.connectedCallback();
+    const themeTypeAttr = this.getAttribute('theme-type');
+    const tokenTypeAttr = this.getAttribute('token-type');
+    console.log('themeTypeAttr:', themeTypeAttr, 'tokenTypeAttr:', tokenTypeAttr);
+  }
   override render() {
     return html`
       <h1>${this.theme.themeType}</h1>
