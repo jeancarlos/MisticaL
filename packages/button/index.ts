@@ -8,7 +8,7 @@ import { ThemeType } from '../../tools/theme/types/theme';
 export class ButtonWebComponent extends ThemeWebComponent {
   static override styles = css`
     button {
-      background: var(--componentsColor-buttonPrimaryBackground);
+      background: var(--components-color-button-primary-background);
       color: white;
       padding: 10px 20px;
       border: none;
@@ -31,13 +31,10 @@ export class ButtonWebComponent extends ThemeWebComponent {
       await this.changeTheme({ themeType: ThemeType.Light});
     }
   }
- override connectedCallback(): void {
-    super.connectedCallback();
-    const themeTypeAttr = this.getAttribute('theme-type');
-    const tokenTypeAttr = this.getAttribute('token-type');
-    console.log('themeTypeAttr:', themeTypeAttr, 'tokenTypeAttr:', tokenTypeAttr);
-  }
+
   override render() {
+    this.style.setProperty('--components-color-button-primary-background', this.theme.componentsColor.buttonPrimaryBackground.value);
+
     return html`
       <h1>${this.theme.themeType}</h1>
       <h1>${this.theme.tokenType}</h1>
