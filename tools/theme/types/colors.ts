@@ -4,6 +4,10 @@ export interface Color {
   description?: string;
 }
 
+export interface Light extends ComponentsColor {}
+
+export interface Dark extends ComponentsColor {}
+
 export interface ComponentsColor {
   [key: string]: Color;
   background: Color;
@@ -118,7 +122,3 @@ export interface ComponentsColor {
   textAppBarSelected: Color;
   customTabsBackground: Color;
 }
-
-export interface Light extends ComponentsColor {}
-
-export interface Dark extends ComponentsColor {}

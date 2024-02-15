@@ -14,7 +14,6 @@ export enum TokenType {
 }
 
 export default interface Token {
-  [key: string]: any;
   light: ComponentsColor;
   dark: ComponentsColor;
   radius: Radius;
