@@ -24,6 +24,7 @@ describe('ml-button.test', () => {
 
     buttonComponent?.click();
 
+    expect(button).lightDom.equal('click button')
     elementUpdated(button)
       .then(() => expect(button).lightDom.equal('click done'));
   });
