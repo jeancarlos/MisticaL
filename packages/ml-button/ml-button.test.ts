@@ -1,22 +1,32 @@
-import { html, fixture, expect, fixtureCleanup } from '@open-wc/testing'
+import { html, fixture, elementUpdated, expect, fixtureCleanup } from '@open-wc/testing'
 import './'
+
+const setup = async (
+  content = 'button',
+  clickAction = () => { }
+) => {
+  return fixture(html`<ml-button onClick="${clickAction}">${content}</ml-button>`)
+}
 
 describe('ml-button.test', () => {
   it('button render', async () => {
-    const form = await fixture(html`<form>
-      <ml-button></ml-button>
-    </form>`)
+    const button = await setup('button rendered')
 
-    expect(form).not.empty
+    expect(button).to.be.accessible();
+    expect(button).lightDom.equal('button rendered');
   })
 
   it('click event', async () => {
-    const form = await fixture(html`<form>
-      <button value="button" />
-    </form>`)
+    let label = 'click button'
+    const clickFn = () => { label = 'click done' }
+    const button = await setup('click button', clickFn);
+    const buttonComponent = button.querySelector('ml-button')
 
-    expect(form).not.empty
-  })
+    buttonComponent?.click();
+
+    elementUpdated(button)
+      .then(() => expect(button).lightDom.equal('click done'));
+  });
 
   afterEach(() => {
     fixtureCleanup();

@@ -8,8 +8,8 @@ export type buttonProps = {
 }
 
 class MLButton extends LitElement {
-  @property({ type })
-  onClick: Function;
+  @property()
+  onClick = (value: unknown) => value;
 
   override render = () => html`
     <button type="button" @click=${{ handleEvent: this.onClick }}>

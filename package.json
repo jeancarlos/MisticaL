@@ -5,8 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "web-test-runner packages/**/*.test.ts --node-resolve --esbuild-target auto",
-    "test:coverage": "web-test-runner packages/**/*.test.ts --node-resolve --esbuild-target auto --coverage",
+    "test": "web-test-runner packages/**/*.test.ts --node-resolve",
+    "test:coverage": "web-test-runner packages/**/*.test.ts --node-resolve --coverage",
     "test:watch": "web-test-runner packages/**/*.test.ts --node-resolve --esbuild-target auto --watch",
     "start": "web-dev-server --node-resolve --watch --app-index demo/index.html --open",
     "start:storybook": "storybook dev -p 6006",
@@ -28,6 +28,7 @@
   },
   "devDependencies": {
     "@open-wc/testing": "^4.0.0",
+    "@remcovaes/web-test-runner-vite-plugin": "^1.2.1",
     "@storybook/addon-essentials": "^7.6.12",
     "@storybook/addon-links": "^7.6.12",
     "@storybook/blocks": "^7.6.12",
@@ -35,6 +36,7 @@
     "@storybook/web-components-vite": "^7.6.12",
     "@stylistic/eslint-plugin": "^1.5.4",
     "@types/eslint": "^8",
+    "@types/mocha": "^10.0.6",
     "@types/node": "^20.11.10",
     "@types/react": "^18",
     "@types/react-dom": "^18",
@@ -43,11 +45,11 @@
     "eslint": "^8.56.0",
     "eslint-plugin-storybook": "^0.6.15",
     "prettier": "^3.2.4",
-    "vite": "^5.0.12",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "storybook": "^7.6.10",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "vite": "^5.0.12"
   },
   "eslintConfig": {
     "extends": [
