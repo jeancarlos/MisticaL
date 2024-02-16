@@ -16,3 +16,4 @@ dist-ssr
 *.sln
 *.sw?
 *install-state.gz
+.yarn
