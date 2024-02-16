@@ -15,11 +15,11 @@ export default {
   },
 };
 
-const Button = ({ backgroundColor = 'white', text }) => {
+const Button = (buttonProps) => {
   return `
-    <button type="button" style="background-color: ${backgroundColor}">
-      ${text}
-    </button>
+    <ml-button>
+      ${slot}
+    </ml-button>
   `;
 };
 

@@ -4,7 +4,9 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "lit-plugin.strict": true,
   "editor.formatOnSave": true,
-  "editor.codeActionsOnSave": { "source.fixAll.eslint": true },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
   "files.exclude": {
       "**/*.css.ts": { "when": "$(basename)" },
       "packages/*/src/spectrum-vars.json": true,

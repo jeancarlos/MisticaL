@@ -1,20 +1,21 @@
 import { LitElement, html } from 'lit';
+import { property } from 'lit/decorators.js';
+
+type value = unknown
+
+export type buttonProps = {
+  onClick: (value: unknown) => value
+}
 
 class MLButton extends LitElement {
-  count = 0
-
+  @property({ type })
+  onClick: Function;
 
   override render = () => html`
-    click count! ${this.count}
-    <button type="button" @click=${{ handleEvent: this._onClick }}>
+    <button type="button" @click=${{ handleEvent: this.onClick }}>
       <slot></slot>
     </button>
-  `;
-
-
-  private _onClick() {
-    this.count++
-  }
+  `
 }
 
 declare global {
