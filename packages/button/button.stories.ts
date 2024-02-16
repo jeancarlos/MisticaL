@@ -1,29 +1,46 @@
 import '.'
 
+import { Meta, StoryFn } from '@storybook/web-components';
+
+interface ButtonArgs {
+  themeType: string;
+  tokenType: string;
+  useArgsToken: boolean;
+}
+
+interface Globals {
+  theme?: string;
+}
+
 export default {
-  title: 'Componentes/ButtonWebComponent',
+  title: 'Components/ButtonWebComponent',
   argTypes: {
     themeType: { control: 'text' },
-    tokenType: { control: 'text' },
-  },
+    tokenType: { control: { type: 'text'} },
+    useArgsToken: { control: 'boolean' }
+  }
+} as Meta<typeof Template>;
+
+const Template = (args: ButtonArgs, { globals }: { globals: Globals }) => {
+  const button = document.createElement('button-web-component');
+  const themeType = args.themeType;
+  const tokenType = args.useArgsToken ? args.tokenType : globals.theme || 'movistar';
+  button.setAttribute('theme-type', themeType);
+  button.setAttribute('token-type', tokenType);
+
+  return button;
 };
 
-const Template = (args, { globals }) => {
-  const botao = document.createElement('button-web-component');
+export const Default: StoryFn<ButtonArgs & {globals: Globals}> = Template.bind({});
 
-  const themeType = args.themeType || globals.theme || 'dark';
-  const tokenType = globals.theme || args.tokenType || 'movistar';
-
-  botao.setAttribute('theme-type', themeType);
-  botao.setAttribute('token-type', tokenType);
-
-  return botao;
+Default.argTypes = {
+  tokenType: {if: {arg: 'useArgsToken'}},
 };
 
-export const Padrao = Template.bind({});
-Padrao.args = {
+Default.args = {
   themeType: 'dark',
   tokenType: 'o2',
+  useArgsToken: true,
 };
 
-Padrao.parameters = {};
+Default.parameters = {};
