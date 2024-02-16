@@ -1,15 +1,21 @@
-import type { Preview } from '@storybook/web-components'
+import '/packages/theme/index.ts';
 
-const preview: Preview = {
-  parameters: {
-    actions: { argTypesRegex: '^on[A-Z].*' },
-    controls: {
-      matchers: {
-        color: /(background|color)$/i,
-        date: /Date$/i,
-      },
+export const globalTypes = {
+  theme: {
+    name: 'Theme',
+    description: 'Global theme for components',
+    defaultValue: 'blau',
+    toolbar: {
+      icon: 'circlehollow',
+      items: [
+        { value: 'blau', title: 'Blau' },
+        { value: 'movistar', title: 'Movistar' },
+        { value: 'movistar-legacy', title: 'MovistarLegacy' },
+        { value: 'o2', title: 'O2' },
+        { value: 'telefonica', title: 'Telefonica' },
+        { value: 'vivo-new', title: 'VivoNew' },
+        { value: 'vivo', title: 'Vivo' },
+      ],
     },
   },
 };
-
-export default preview;
