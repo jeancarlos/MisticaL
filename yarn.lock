@@ -8954,6 +8954,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "mistical@workspace:."
   dependencies:
+    "@lit/context": "npm:^1.1.0"
     "@open-wc/testing": "npm:^4.0.0"
     "@remcovaes/web-test-runner-vite-plugin": "npm:^1.2.1"
     "@storybook/addon-essentials": "npm:^7.6.12"

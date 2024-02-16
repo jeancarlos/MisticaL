@@ -1,0 +1,46 @@
+import { Color } from './colors';
+
+export default interface Palette {
+  [key: string]: Color;
+  movistarBlue: Color;
+  movistarBlue10: Color;
+  movistarBlue20: Color;
+  movistarBlue30: Color;
+  movistarBlue40: Color;
+  movistarBlue55: Color;
+  movistarGreen: Color;
+  movistarGreen10: Color;
+  movistarGreen30: Color;
+  movistarGreen40: Color;
+  movistarGreen60: Color;
+  movistarGreen70: Color;
+  pepper: Color;
+  pepper10: Color;
+  pepper40: Color;
+  pepper55: Color;
+  pepper70: Color;
+  egg: Color;
+  egg10: Color;
+  egg40: Color;
+  egg80: Color;
+  pink: Color;
+  purple: Color;
+  purple10: Color;
+  purple40: Color;
+  purple70: Color;
+  grey1: Color;
+  grey2: Color;
+  grey3: Color;
+  grey4: Color;
+  grey5: Color;
+  grey6: Color;
+  white: Color;
+  movistarBlueDark: Color;
+  darkModeBlack: Color;
+  darkModeGrey: Color;
+  darkModeGrey2: Color;
+  darkModeGrey3: Color;
+  darkModeGrey4: Color;
+  darkModeGrey5: Color;
+  darkModeGrey6: Color;
+}
