@@ -44,10 +44,9 @@ class TokensRepository {
 
     ['dark', 'light'].forEach((themeType) => {
       for (const key in newTokens[themeType]) {
-        const match = newTokens[themeType][key].value.match(/\{palette\.(\w+)\}/);
-        if (match) {
-          newTokens[themeType][key].value = newTokens.global.palette[match[1]].value;
-        }
+        newTokens[themeType][key].value = newTokens[themeType][key].value.replace(/\{palette\.(\w+)\}/g, (match: string, p1: string) => {
+          return tokens.global.palette[p1]?.value || match;
+        });
       }
     });
 
