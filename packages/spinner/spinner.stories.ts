@@ -1,11 +1,12 @@
-import '.'
+import '.';
 
 import { Meta, StoryFn } from '@storybook/web-components';
 
-interface ButtonArgs {
+interface SpinnerArgs {
   themeType: string;
   tokenType: string;
   useArgsToken: boolean;
+  size: number;
 }
 
 interface Globals {
@@ -13,25 +14,27 @@ interface Globals {
 }
 
 export default {
-  title: 'Components/ButtonWebComponent',
+  title: 'Components/SpinnerWebComponent',
   argTypes: {
     themeType: { control: 'text' },
     tokenType: { control: { type: 'text'} },
-    useArgsToken: { control: 'boolean' }
+    useArgsToken: { control: 'boolean' },
+    size: { control: { type: 'range', min: 24, max:100, step: 4} }
   }
 } as Meta<typeof Template>;
 
-const Template = (args: ButtonArgs, { globals }: { globals: Globals }) => {
-  const button = document.createElement('button-web-component');
+const Template = (args: SpinnerArgs, { globals }: { globals: Globals }) => {
+  const spinner = document.createElement('spinner-web-component');
   const themeType = args.themeType;
   const tokenType = args.useArgsToken ? args.tokenType : globals.theme || 'movistar';
-  button.setAttribute('theme-type', themeType);
-  button.setAttribute('token-type', tokenType);
+  spinner.setAttribute('theme-type', themeType);
+  spinner.setAttribute('token-type', tokenType);
+  spinner.setAttribute('size', args.size.toString());
 
-  return button;
+  return spinner;
 };
 
-export const Default: StoryFn<ButtonArgs & {globals: Globals}> = Template.bind({});
+export const Default: StoryFn<SpinnerArgs & {globals: Globals}> = Template.bind({});
 
 Default.argTypes = {
   tokenType: {if: {arg: 'useArgsToken'}},
@@ -41,6 +44,7 @@ Default.args = {
   themeType: 'dark',
   tokenType: 'o2',
   useArgsToken: true,
+  size: 24,
 };
 
 Default.parameters = {};
