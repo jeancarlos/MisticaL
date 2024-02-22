@@ -1,4 +1,4 @@
-import { LitElement, html } from 'lit';
+import { LitElement } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { Theme, ThemeType } from '../../tools/theme/types/theme';
 import { TokenType } from '../../tools/theme/types/token';
