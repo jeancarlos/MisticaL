@@ -1,48 +1,44 @@
-// accordion-web-component-styles.js
 import { css } from 'lit';
 
 export default css`
-  div {
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
+  .accordion-container {
+    border: none;
+    padding: 1rem;
+    background-color: transparent;
+    min-width: 375px
   }
-  details {
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    padding: .5em;
-    margin-bottom: .5em;
+
+  .accordion-container:hover {
+    background-color: var(--accordion-background-hover);
   }
-  summary {
+
+  .accordion-container:active {
+    background-color: var(--accordion-background-pressed);
+  }
+
+  .accordion-header {
     display: flex;
-    height: 100%;
     align-items: center;
     justify-content: space-between;
-    font-weight: bold;
-    padding: .5em;
     cursor: pointer;
-    position: relative;
-    list-style: none;
   }
-  summary::-webkit-details-marker {
-    display: none;
-  }
-  summary div {
+
+  .accordion-header div {
     display: flex;
     flex-direction: column;
   }
-  summary div span {
-    display: block;
+
+  .accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-in-out;
   }
-  summary svg {
-    width: 1em;
-    height: 1em;
-    transition: transform 0.3s ease-in-out;
+
+  .accordion-content.open {
+    max-height: 500px; /* adjust this value as needed */
   }
-  details[open] summary svg {
-    transform: rotate(180deg);
-  }
-  p {
-    margin: .5em;
+
+  .accordion-title {
+    font-size: 1rem;
   }
 `;

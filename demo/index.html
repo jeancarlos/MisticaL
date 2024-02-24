@@ -7,13 +7,16 @@
     <script type="module" src="/dist/packages/accordion/index.js"></script>
 </head>
 <body>
-    <accordion-web-component></accordion-web-component>
+  <div style="display: flex; flex-direction: column; align-items: center;">
+    <accordion-web-component token-type="vivo" theme-type="light"></accordion-web-component>
+  </div>
+
 
     <script>
         const accordion = document.querySelector('accordion-web-component');
         accordion.items = [
-            { title: 'Item 1', subtitle: 'this is item 1', content: 'This is item 1', key:'1' },
-            { title: 'Item 2', subtitle: 'this is item 2', content: 'This is item 2', key:'2' },
+            { title: 'Title 1', subtitle: 'Subtitle 1', content: 'This is item 1', key:'1' },
+            { title: 'Title 2', subtitle: 'Subtitle 2', content: 'This is item 2', key:'2' },
         ];
     </script>
 </body>
