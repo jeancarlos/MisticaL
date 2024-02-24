@@ -1,4 +1,4 @@
-import { LitElement } from 'lit';
+import { CSSResultGroup, LitElement, css } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { Theme, ThemeType } from '../../tools/theme/types/theme';
 import { TokenType } from '../../tools/theme/types/token';
@@ -25,6 +25,17 @@ export class ThemeWebComponent extends LitElement {
     return this._theme;
   }
 
+  static override styles = css`
+  :host {
+    display: block;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    font-size: 62.5%;
+  }
+` as CSSResultGroup;
+
   override async connectedCallback() {
     super.connectedCallback();
     const theme = await ThemeService.build(this.tokenType, this.themeType);
@@ -38,5 +49,4 @@ export class ThemeWebComponent extends LitElement {
     this._theme = newTheme
     this.requestUpdate();
   }
-
 }
