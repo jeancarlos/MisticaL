@@ -1,3 +1,6 @@
 [submodule "submodules/mistica-design"]
 	path = submodules/mistica-design
 	url = git@github.com:Telefonica/mistica-design.git
+[submodule "submodules/mistica-icons"]
+	path = submodules/mistica-icons
+	url = https://github.com/Telefonica/mistica-icons.git

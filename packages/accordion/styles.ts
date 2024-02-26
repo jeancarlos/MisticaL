@@ -19,8 +19,19 @@ export default css`
   .accordion-header {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between;
     cursor: pointer;
+  }
+
+  .chevron {
+    display: block;
+    width: 16px;
+    height: 16px;
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .chevron.rotate {
+    transform: rotate(180deg);
   }
 
   .accordion-header div {
@@ -37,10 +48,6 @@ export default css`
     overflow: hidden;
     transition: max-height 0.3s ease-in-out;
     margin-top: 1rem;
-  }
-
-  .accordion-content.open {
-    max-height: 500px; /* adjust this value as needed */
   }
 
   .accordion-title {

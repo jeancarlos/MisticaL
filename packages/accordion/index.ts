@@ -3,6 +3,7 @@ import { customElement, property } from 'lit/decorators.js';
 import { ThemeWebComponent } from '../theme';
 import './components/asset-accordion'
 import styles from './styles';
+import { chevronUpRegularSvg } from '../../assets/icons'
 
 type AccordionItem = {
   asset?: {
@@ -39,14 +40,14 @@ export class AccordionWebComponent extends ThemeWebComponent {
 
   toggleAccordion(index: number) {
     const content = this.shadowRoot?.getElementById(`accordion-content-${index}`);
-    if (content) {
-      if (content.style.maxHeight) {
-        content.style.maxHeight = '';
-      } else {
-        content.style.maxHeight = `${content.scrollHeight}px`;
-      }
-    }
+    const chevron = this.shadowRoot?.getElementById(`chevron-${index}`);
+
+    if (!content || !chevron) return;
+
+    content.style.maxHeight = content.style.maxHeight ? '' : `${content.scrollHeight}px`;
+    chevron.classList.toggle('rotate');
   }
+
 
   override render() {
     super.render();
@@ -62,6 +63,7 @@ export class AccordionWebComponent extends ThemeWebComponent {
                   <span class="accordion-title">${item.title}</span>
                   <span class="accordion-subtitle">${item.subtitle}</span>
                 </div>
+                <div class="chevron" id="chevron-${index}">${chevronUpRegularSvg}</div>
               </div>
               <div class="accordion-content" id="accordion-content-${index}">
                 <p>${item.content}</p>
