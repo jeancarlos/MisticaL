@@ -7,17 +7,44 @@
     <script type="module" src="/dist/packages/accordion/index.js"></script>
 </head>
 <body>
-  <div style="display: flex; flex-direction: column; align-items: center;">
-    <accordion-web-component token-type="vivo" theme-type="light"></accordion-web-component>
+  <div style="display: flex; flex-direction: column; align-items: center; width: 100%; height: 100vh; justify-content: center;">
+    <div style="display: flex; width: 375px;">
+      <accordion-web-component token-type="vivo" theme-type="light"></accordion-web-component>
+    </div>
   </div>
 
 
-    <script>
-        const accordion = document.querySelector('accordion-web-component');
-        accordion.items = [
-            { title: 'Title 1', subtitle: 'Subtitle 1', content: 'This is item 1', key:'1' },
-            { title: 'Title 2', subtitle: 'Subtitle 2', content: 'This is item 2', key:'2' },
-        ];
-    </script>
+  <script>
+    const accordion = document.querySelector('accordion-web-component');
+    accordion.items = [
+        {
+          title: 'Title 1',
+          subtitle: 'Subtitle 1',
+          content: 'Modernipsum dolor sit amet deformalism new objectivity, video art stuckism international young british artists les nabis, post-impressionism modern art fauvism post-impressionism. Primitivism carolingian superstroke futurism lowbrow tonalism, lyrical abstraction synchromism maximalism color field painting renaissance, installation art pop art barbizon school remodernism',
+          asset: {
+            path: './assets/flash_252851.png',
+            type: 'icon'
+          }
+        },
+        {
+          title: 'Title 2',
+          subtitle: 'Subtitle 2',
+          content: 'This is item 2',
+          asset: {
+            path: './assets/heart_2077502.png',
+            type: 'icon'
+          }
+        },
+        {
+          title: 'Title 3',
+          subtitle: 'Subtitle 3',
+          content: 'Modernipsum dolor sit amet deformalism new objectivity, video art stuckism international young british artists les nabis, post-impressionism modern art fauvism post-impressionism. Primitivism carolingian superstroke futurism lowbrow tonalism, lyrical abstraction synchromism maximalism color field painting renaissance, installation art pop art barbizon school remodernism.',
+          asset: {
+            path: './assets/perfil.jpg',
+            type: 'avatar'
+          }
+        },
+    ];
+</script>
 </body>
 </html>

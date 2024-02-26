@@ -1,14 +1,17 @@
 import { html, PropertyValueMap } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { ThemeWebComponent } from '../theme';
+import './components/asset-accordion'
 import styles from './styles';
 
 type AccordionItem = {
-  asset?: string;
+  asset?: {
+    path: string;
+    type: string;
+  };
   title: string;
   subtitle: string;
   content: string;
-  key: string;
 };
 
 @customElement('accordion-web-component')
@@ -30,6 +33,7 @@ export class AccordionWebComponent extends ThemeWebComponent {
     if(this.theme) {
       this.style.setProperty('--accordion-background-hover', this.theme.componentsColor.backgroundContainerHover.value)
       this.style.setProperty('--accordion-background-pressed', this.theme.componentsColor.backgroundContainerPressed.value)
+      this.style.setProperty('--accordion-divider', this.theme.componentsColor.divider.value)
     }
   }
 
@@ -48,21 +52,25 @@ export class AccordionWebComponent extends ThemeWebComponent {
     super.render();
 
     return html`
-      ${this.items.map((item, index) =>
-        html`
-          <div class="accordion-container">
-            <div class="accordion-header" @click="${() => this.toggleAccordion(index)}">
-              <div>
-                <span class="accordion-title">${item.title}</span>
-                <span class="accordion-subtitle">${item.subtitle}</span>
+      <div class="accordion-wrapper">
+        ${this.items.map((item, index) =>
+          html`
+            <div class="accordion-container">
+              <div class="accordion-header" @click="${() => this.toggleAccordion(index)}">
+                ${item.asset && html`<asset-accordion class="accordion-asset" .asset=${item.asset}></asset-accordion>`}
+                <div>
+                  <span class="accordion-title">${item.title}</span>
+                  <span class="accordion-subtitle">${item.subtitle}</span>
+                </div>
+              </div>
+              <div class="accordion-content" id="accordion-content-${index}">
+                <p>${item.content}</p>
               </div>
             </div>
-            <div class="accordion-content" id="accordion-content-${index}">
-              <p>${item.content}</p>
-            </div>
-          </div>
-        `
-      )}
+            ${index < this.items.length - 1 ? html`<span class="accordion-divider"></span>` : null}
+            `
+        )}
+      </div>
     `;
   }
 }

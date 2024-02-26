@@ -19,7 +19,7 @@ export default css`
   .accordion-header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     cursor: pointer;
   }
 
@@ -28,10 +28,15 @@ export default css`
     flex-direction: column;
   }
 
+  .accordion-asset {
+    margin-right: 1rem;
+  }
+
   .accordion-content {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.5s ease-in-out;
+    transition: max-height 0.3s ease-in-out;
+    margin-top: 1rem;
   }
 
   .accordion-content.open {
@@ -40,5 +45,16 @@ export default css`
 
   .accordion-title {
     font-size: 1rem;
+  }
+
+  .accordion-subtitle {
+    font-size: 0.8rem;
+    color: #666;
+  }
+
+  .accordion-divider {
+    display: block;
+    width: 100%;
+    border-top: 1px solid var(--accordion-divider);
   }
 `;

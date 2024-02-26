@@ -26,13 +26,12 @@ export class ThemeWebComponent extends LitElement {
   }
 
   static override styles = css`
-  :host {
+  * {
     display: block;
     box-sizing: border-box;
     margin: 0;
     padding: 0;
     font-family: 'Roboto', sans-serif;
-    font-size: 62.5%;
   }
 ` as CSSResultGroup;
 
