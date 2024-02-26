@@ -1,4 +1,4 @@
-import { LitElement, html, css, CSSResultGroup } from 'lit';
+import { LitElement, css, CSSResultGroup } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { Theme, ThemeType } from '../../tools/theme/types/theme';
 import { TokenType } from '../../tools/theme/types/token';
@@ -72,9 +72,4 @@ export class ThemeWebComponent extends LitElement {
     this.requestUpdate();
   }
 
-  override render() {
-    return html`
-      <slot></slot>
-    `;
-  }
 }
