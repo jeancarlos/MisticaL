@@ -1,4 +1,4 @@
-import { LitElement, PropertyValueMap, html } from 'lit';
+import { LitElement, html, css, CSSResultGroup } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { Theme, ThemeType } from '../../tools/theme/types/theme';
 import { TokenType } from '../../tools/theme/types/token';
@@ -10,7 +10,40 @@ interface ChangeThemeDTO {
 }
 @customElement('theme-web-component')
 export class ThemeWebComponent extends LitElement {
-  @property({ type: String, attribute: 'theme-type'})
+  static override get styles(): CSSResultGroup {
+    return css`
+    @font-face {
+    font-family: 'VivoType';
+    src: url('./fonts/WOFF2/VivoTypeW05-Light.woff2') format('woff2'),
+     url('./fonts/WOFF/VivoTypeW05-Light.woff') format('woff');
+    font-weight: 400;
+    font-style: normal
+  }
+    @font-face {
+    font-family: 'VivoType';
+    src: url('./fonts/WOFF2/VivoTypeW05-Regular.woff2') format('woff2'),
+     url('./fonts/WOFF/VivoTypeW05-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal
+  }
+    @font-face {
+    font-family: 'VivoType';
+    src: url('./fonts/WOFF2/VivoTypeW05-Bold.woff2') format('woff2'),
+     url('./fonts/WOFF/VivoTypeW05-Bold.woff') format('woff');
+      font-weight: 700;
+    font-style: normal
+  }
+
+  :host {
+    font-family: 'VivoType', sans-serif;
+    --font-weight-light: 300;
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-bold: 700;
+  }
+`
+  }
+  @property({ type: String, attribute: 'theme-type' })
   themeType!: ThemeType;
 
   @property({ type: String, attribute: 'token-type' })
@@ -18,27 +51,19 @@ export class ThemeWebComponent extends LitElement {
 
   @state()
   private _theme!: Theme
+
   private _service!: ThemeService;
 
   public get theme() {
     return this._theme;
   }
 
-  override connectedCallback() {
+  override async connectedCallback() {
     super.connectedCallback();
-    ThemeService.build(this.tokenType, this.themeType).then(theme => {
-      this._theme = theme.currentTheme;
-      this._service = theme;
-      this.requestUpdate();
-    });
-  }
-
-  protected override updated(_changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
-    super.updated(_changedProperties);
-
-    if (_changedProperties.has('themeType') || _changedProperties.has('tokenType')) {
-      this.changeTheme({ themeType: this.themeType, tokenType: this.tokenType });
-    }
+    const theme = await ThemeService.build(this.tokenType, this.themeType);
+    this._theme = theme.currentTheme;
+    this._service = theme;
+    this.requestUpdate();
   }
 
   async changeTheme({ themeType, tokenType }: ChangeThemeDTO) {
