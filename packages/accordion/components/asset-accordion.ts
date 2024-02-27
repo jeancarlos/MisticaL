@@ -31,23 +31,23 @@ export class AssetAccordion extends LitElement {
       max-height: 100%;
     }
     .square-image {
-      width: 100px;
-      height: 100px;
+      width: 64px;
+      height: 64px;
       object-fit: cover;
     }
     .wide-image {
-      width: 160px;
-      height: 90px;
+      width: 136px;
+      height: 76.5px;
       object-fit: cover;
     }
     .portrait-image {
-      width: 70px;
-      height: 100px;
+      width: 80px;
+      height: 114.29px;
       object-fit: cover;
     }
     .avatar {
-      width: 50px;
-      height: 50px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       object-fit: cover;
     }
