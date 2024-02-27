@@ -1,4 +1,3 @@
-import { css } from 'lit';
 import { LitElement, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 
@@ -6,14 +5,6 @@ import { customElement, property } from 'lit/decorators.js';
 export class AccordionWC extends LitElement {
   @property({ type: Boolean })
   singleOpen = false;
-
-  static override styles = css`
-    .wrapper {
-      display: flex;
-      flex-direction: column;
-      background-color: #fff;
-    }
-  `
 
   override async connectedCallback() {
     super.connectedCallback();

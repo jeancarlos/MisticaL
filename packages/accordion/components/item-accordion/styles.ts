@@ -25,12 +25,23 @@ export default css`
 
   .left-header {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
+    justify-content: center;
   }
 
   .details {
     display: flex;
     flex-direction: column;
+    line-height: 24px;
+  }
+
+  .title {
+    font-size: 1rem;
+  }
+
+  .subtitle {
+    font-size: 0.9rem;
+    color: #666;
   }
 
   .chevron {
@@ -51,15 +62,10 @@ export default css`
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.3s ease-in-out;
-  }
 
-  .title {
-    font-size: 1rem;
-  }
-
-  .subtitle {
-    font-size: 0.8rem;
-    color: #666;
+    slot {
+      margin-top: 1rem;
+    }
   }
 
   .divider {

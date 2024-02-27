@@ -25,6 +25,9 @@ export class AccordionItemWC extends ThemeWebComponent {
   @property({ type: Boolean })
   open = false;
 
+  @property({ type: Boolean })
+  hasSlot = false;
+
   static override styles = [ThemeWebComponent.styles, styles];
 
   _toggleAccordion() {
@@ -78,6 +81,7 @@ export class AccordionItemWC extends ThemeWebComponent {
         </div>
         <div class="content">
           <p>${this.content}</p>
+          ${this.hasSlot ? html`<slot></slot>` : ''}
         </div>
       </div>
     `;
