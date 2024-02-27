@@ -31,14 +31,13 @@ export class ThemeWebComponent extends LitElement {
     src: url('./fonts/WOFF2/VivoTypeW05-Bold.woff2') format('woff2'),
      url('./fonts/WOFF/VivoTypeW05-Bold.woff') format('woff');
       font-weight: 700;
-    font-style: normal
+      font-style: normal
   }
 
   :host {
     font-family: 'VivoType', sans-serif;
     --font-weight-light: 300;
     --font-weight-regular: 400;
-    --font-weight-medium: 500;
     --font-weight-bold: 700;
   }
 `
