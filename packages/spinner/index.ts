@@ -7,6 +7,8 @@ import { customElement, property } from "lit/decorators.js";
 export class SpinnerWebComponent extends ThemeWebComponent {
   @property({ type: Number }) size = 24;
 
+  _borderWidth = this.size / 8;
+
   static override styles = css`
     .spinner {
       animation: spin 1s linear infinite;
@@ -34,10 +36,9 @@ export class SpinnerWebComponent extends ThemeWebComponent {
 
   private updateStyles() {
     if (this.theme) {
-      const borderWidth = this.size / 8;
       this.style.setProperty('--spinner-color', this.theme.componentsColor.controlActivated.value);
       this.style.setProperty('--spinner-size', `${this.size}px`);
-      this.style.setProperty('--spinner-border-width', `${borderWidth}px`);
+      this.style.setProperty('--spinner-border-width', `${this._borderWidth}px`);
     }
   }
 

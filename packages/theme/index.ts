@@ -10,7 +10,7 @@ interface ChangeThemeDTO {
 }
 @customElement('theme-web-component')
 export class ThemeWebComponent extends LitElement {
-  @property({ type: String, attribute: 'theme-type'})
+  @property({ type: String, attribute: 'theme-type' })
   themeType!: ThemeType;
 
   @property({ type: String, attribute: 'token-type' })
