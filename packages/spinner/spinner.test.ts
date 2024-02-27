@@ -3,8 +3,8 @@ import { SpinnerWebComponent } from '.';
 import '.';
 
 
-const setup = async ( size?: number ) => {
-  const el = await (fixture(html`<spinner-web-component theme-type='light' token-type='vivo'></spinner-web-component>`)) as SpinnerWebComponent;
+const setup = async (size?: number) => {
+  const el = await (fixture(html`<spinner-web-component .size?="${size}" theme-type='light' token-type='vivo'></spinner-web-component>`)) as SpinnerWebComponent;
 
   return el;
 }
