@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "web-dev-server --node-resolve --watch --app-index demo/index.html --open",
+    "start:dev": "concurrently --raw \"tsc --watch --preserveWatchOutput\" \"web-dev-server --node-resolve --watch --open\"",
     "build": "tsc",
     "test": "web-test-runner packages/**/*.test.ts --node-resolve --esbuild-target auto",
     "test:coverage": "web-test-runner packages/**/*.test.ts --node-resolve --esbuild-target auto --coverage",
@@ -45,6 +45,7 @@
     "@web/dev-server": "^0.4.1",
     "@web/dev-server-esbuild": "^1.0.2",
     "@web/test-runner": "^0.18.0",
+    "concurrently": "^8.2.2",
     "eslint": "^8.56.0",
     "eslint-plugin-storybook": "^0.6.15",
     "prettier": "^3.2.4",
