@@ -2,10 +2,10 @@ import { css } from 'lit';
 
 export default css`
   .container {
+    min-height: 56px;
     border: none;
     padding: 1rem;
     background-color: transparent;
-    min-width: 375px
   }
 
   .container:hover {
@@ -47,7 +47,7 @@ export default css`
   .chevron {
     display: block;
     transition: transform 0.3s ease-in-out;
-    scale: 0.5;
+    scale: 0.7;
   }
 
   .chevron.rotate {
