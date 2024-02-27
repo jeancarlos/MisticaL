@@ -1,13 +1,13 @@
 import { LitElement, html, css } from 'lit-element';
 import { customElement, property } from 'lit/decorators.js';
 
-interface IAssetAccordion {
+interface IAccordionAsset {
   path: string;
   type: string;
 }
-@customElement('asset-accordion')
-export class AssetAccordion extends LitElement {
-  @property({ type: Object }) asset: IAssetAccordion = { path: '', type: ''};
+@customElement('accordion-asset')
+export class AccordionAsset extends LitElement {
+  @property({ type: Object }) asset: IAccordionAsset = { path: '', type: ''};
 
   static override styles = css`
     img {

@@ -2,8 +2,8 @@ import { PropertyValueMap, html } from 'lit';
 import { ThemeWebComponent } from '../../../theme';
 import { chevronUpRegularSvg } from '../../../../assets/icons'
 import { customElement, property } from 'lit/decorators.js';
-import styles from "./styles"
-import '../asset-accordion/index'
+import fullWidthStyles from "./full-width-styles"
+import '../accordion-asset'
 
 @customElement('accordion-item-wc')
 export class AccordionItemWC extends ThemeWebComponent {
@@ -28,40 +28,13 @@ export class AccordionItemWC extends ThemeWebComponent {
   @property({ type: Boolean })
   hasSlot = false;
 
-  static override styles = [ThemeWebComponent.styles, styles];
-
-  _toggleAccordion() {
-    this.open = !this.open;
-    this._updateContentAndChevron();
-    if (this.open) {
-      this.dispatchEvent(new CustomEvent('accordion-open', { bubbles: true, composed: true }));
-    }
-  }
-
-  _updateContentAndChevron() {
-    const content = this.shadowRoot?.querySelector('.content') as HTMLElement;
-    const chevron = this.shadowRoot?.querySelector('.chevron') as HTMLElement;
-
-    if (!content || !chevron) return;
-
-    content.style.maxHeight = this.open ? `${content.scrollHeight}px` : '';
-    content.style.marginTop = this.open ? '1rem' : '';
-    chevron.classList.toggle('rotate', this.open);
-  }
+  static override styles = [ThemeWebComponent.styles, fullWidthStyles];
 
   override updated(changedProperties: PropertyValueMap<any>) {
     super.updated(changedProperties);
 
     if(changedProperties.has('_theme') || changedProperties.has('props')) {
-      this.loadCssTokens()
-    }
-  }
-
-  private loadCssTokens = () => {
-    if(this.theme) {
-      this.style.setProperty('--accordion-background-hover', this.theme.componentsColor.backgroundContainerHover.value)
-      this.style.setProperty('--accordion-background-pressed', this.theme.componentsColor.backgroundContainerPressed.value)
-      this.style.setProperty('--accordion-divider', this.theme.componentsColor.divider.value)
+      this._loadCssTokens()
     }
   }
 
@@ -71,7 +44,7 @@ export class AccordionItemWC extends ThemeWebComponent {
       <div class="container">
         <div class="header" @click="${this._toggleAccordion}">
           <div class="left-header">
-            ${this.asset && html`<asset-accordion class="asset" .asset=${this.asset}></asset-accordion>`}
+            ${this.asset && html`<accordion-asset class="asset" .asset=${this.asset}></accordion-asset>`}
             <div class="details">
               <span class="title">${this.header}</span>
               <span class="subtitle">${this.subtitle}</span>
@@ -85,5 +58,32 @@ export class AccordionItemWC extends ThemeWebComponent {
         </div>
       </div>
     `;
+  }
+
+  private _loadCssTokens = () => {
+    if(this.theme) {
+      this.style.setProperty('--accordion-background-hover', this.theme.componentsColor.backgroundContainerHover.value)
+      this.style.setProperty('--accordion-background-pressed', this.theme.componentsColor.backgroundContainerPressed.value)
+      this.style.setProperty('--accordion-divider', this.theme.componentsColor.divider.value)
+    }
+  }
+
+  private _toggleAccordion() {
+    this.open = !this.open;
+    this._updateContentAndChevron();
+    if (this.open) {
+      this.dispatchEvent(new CustomEvent('accordion-open', { bubbles: true, composed: true }));
+    }
+  }
+
+  private _updateContentAndChevron() {
+    const content = this.shadowRoot?.querySelector('.content') as HTMLElement;
+    const chevron = this.shadowRoot?.querySelector('.chevron') as HTMLElement;
+
+    if (!content || !chevron) return;
+
+    content.style.maxHeight = this.open ? `${content.scrollHeight}px` : '';
+    content.style.marginTop = this.open ? '1rem' : '';
+    chevron.classList.toggle('rotate', this.open);
   }
 }
