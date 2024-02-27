@@ -20,6 +20,10 @@ export class AccordionWebComponent extends ThemeWebComponent {
   @property({ type: Array })
   items: AccordionItem[] = [];
 
+  @property({ type: Boolean })
+  singleOpen: boolean = false;
+
+
   static override styles = [ThemeWebComponent.styles, styles];
 
   override updated(changedProperties: PropertyValueMap<any>) {
@@ -39,13 +43,33 @@ export class AccordionWebComponent extends ThemeWebComponent {
   }
 
   toggleAccordion(index: number) {
-    const content = this.shadowRoot?.getElementById(`accordion-content-${index}`);
+    if (this.singleOpen) {
+      this.closeAll(index);
+    }
+
+    const content = this.shadowRoot?.getElementById(`content-${index}`);
     const chevron = this.shadowRoot?.getElementById(`chevron-${index}`);
 
     if (!content || !chevron) return;
 
     content.style.maxHeight = content.style.maxHeight ? '' : `${content.scrollHeight}px`;
+    content.style.marginTop = content.style.marginTop ? '' : '1rem';
     chevron.classList.toggle('rotate');
+  }
+
+  closeAll(exceptIndex: number) {
+    this.items.forEach((_, index) => {
+      if (index !== exceptIndex) {
+        const content = this.shadowRoot?.getElementById(`content-${index}`);
+        const chevron = this.shadowRoot?.getElementById(`chevron-${index}`);
+
+        if (!content || !chevron) return;
+
+        content.style.maxHeight = '';
+        content.style.marginTop = '';
+        chevron.classList.remove('rotate');
+      }
+    });
   }
 
 
@@ -53,23 +77,25 @@ export class AccordionWebComponent extends ThemeWebComponent {
     super.render();
 
     return html`
-      <div class="accordion-wrapper">
+      <div class="wrapper">
         ${this.items.map((item, index) =>
           html`
-            <div class="accordion-container">
-              <div class="accordion-header" @click="${() => this.toggleAccordion(index)}">
-                ${item.asset && html`<asset-accordion class="accordion-asset" .asset=${item.asset}></asset-accordion>`}
-                <div>
-                  <span class="accordion-title">${item.title}</span>
-                  <span class="accordion-subtitle">${item.subtitle}</span>
+            <div class="container">
+              <div class="header" @click="${() => this.toggleAccordion(index)}">
+                <div class="left-header">
+                  ${item.asset && html`<asset-accordion class="asset" .asset=${item.asset}></asset-accordion>`}
+                  <div class="details">
+                    <span class="title">${item.title}</span>
+                    <span class="subtitle">${item.subtitle}</span>
+                  </div>
                 </div>
                 <div class="chevron" id="chevron-${index}">${chevronUpRegularSvg}</div>
               </div>
-              <div class="accordion-content" id="accordion-content-${index}">
-                <p>${item.content}</p>
-              </div>
+                <div class="content" id="content-${index}">
+                  <p>${item.content}</p>
+                </div>
             </div>
-            ${index < this.items.length - 1 ? html`<span class="accordion-divider"></span>` : null}
+            ${index < this.items.length - 1 ? html`<span class="divider"></span>` : null}
             `
         )}
       </div>

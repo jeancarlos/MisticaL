@@ -1,32 +1,40 @@
 import { css } from 'lit';
 
 export default css`
-  .accordion-container {
+  .container {
     border: none;
     padding: 1rem;
     background-color: transparent;
     min-width: 375px
   }
 
-  .accordion-container:hover {
+  .container:hover {
     background-color: var(--accordion-background-hover);
   }
 
-  .accordion-container:active {
+  .container:active {
     background-color: var(--accordion-background-pressed);
   }
 
-  .accordion-header {
+  .header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     cursor: pointer;
   }
 
+  .left-header {
+    display: flex;
+    align-items: center;
+  }
+
+  .details {
+    display: flex;
+    flex-direction: column;
+  }
+
   .chevron {
     display: block;
-    width: 16px;
-    height: 16px;
     transition: transform 0.3s ease-in-out;
   }
 
@@ -34,32 +42,26 @@ export default css`
     transform: rotate(180deg);
   }
 
-  .accordion-header div {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .accordion-asset {
+  .asset {
     margin-right: 1rem;
   }
 
-  .accordion-content {
+  .content {
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.3s ease-in-out;
-    margin-top: 1rem;
   }
 
-  .accordion-title {
+  .title {
     font-size: 1rem;
   }
 
-  .accordion-subtitle {
+  .subtitle {
     font-size: 0.8rem;
     color: #666;
   }
 
-  .accordion-divider {
+  .divider {
     display: block;
     width: 100%;
     border-top: 1px solid var(--accordion-divider);
