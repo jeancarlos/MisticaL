@@ -9,6 +9,7 @@
     "experimentalDecorators": true,
     "declaration": true,
     "useDefineForClassFields": false,
+    "noImplicitAny": true,
     "noImplicitOverride": true,
     "noImplicitReturns": true,
     "resolveJsonModule": true,
