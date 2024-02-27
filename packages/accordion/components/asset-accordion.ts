@@ -34,16 +34,19 @@ export class AssetAccordion extends LitElement {
       width: 64px;
       height: 64px;
       object-fit: cover;
+      border-radius: 8px;
     }
     .wide-image {
       width: 136px;
       height: 76.5px;
       object-fit: cover;
+      border-radius: 8px;
     }
     .portrait-image {
       width: 80px;
       height: 114.29px;
       object-fit: cover;
+      border-radius: 8px;
     }
     .avatar {
       width: 40px;
