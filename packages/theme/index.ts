@@ -10,6 +10,39 @@ interface ChangeThemeDTO {
 }
 @customElement('theme-web-component')
 export class ThemeWebComponent extends LitElement {
+	static override get styles(): CSSResultGroup {
+		return css`
+			@font-face {
+				font-family: 'VivoType';
+				src: url('../../tools/theme/fonts/WOFF2/VivoTypeW05-Light.woff2') format('woff2'),
+				url('../../tools/theme/fonts/WOFF/VivoTypeW05-Light.woff') format('woff');
+				font-weight: 300;
+				font-style: normal
+			}
+			@font-face {
+				font-family: 'VivoType';
+				src: url('../../tools/theme/fonts/WOFF2/VivoTypeW05-Regular.woff2') format('woff2'),
+				url('../../tools/theme/fonts/WOFF/VivoTypeW05-Regular.woff') format('woff');
+				font-weight: 400;
+				font-style: normal
+			}
+			@font-face {
+				font-family: 'VivoType';
+				src: url('../../tools/theme/fonts/WOFF2/VivoTypeW05-Bold.woff2') format('woff2'),
+				url('../../tools/theme/fonts/WOFF/VivoTypeW05-Bold.woff') format('woff');
+				font-weight: 700;
+				font-style: normal
+			}
+
+			:host {
+				font-family: 'VivoType', sans-serif;
+				--font-weight-light: 300;
+				--font-weight-regular: 400;
+				--font-weight-bold: 700;
+			}
+		`
+	}
+
   @property({ type: String, attribute: 'theme-type' })
   themeType!: ThemeType;
 
@@ -24,15 +57,6 @@ export class ThemeWebComponent extends LitElement {
   public get theme() {
     return this._theme;
   }
-
-  static override styles = css`
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Roboto', sans-serif;
-  }
-` as CSSResultGroup;
 
   override async connectedCallback() {
     super.connectedCallback();
