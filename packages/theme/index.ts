@@ -27,7 +27,6 @@ export class ThemeWebComponent extends LitElement {
 
   static override styles = css`
   * {
-    display: block;
     box-sizing: border-box;
     margin: 0;
     padding: 0;

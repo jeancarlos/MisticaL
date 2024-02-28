@@ -10,13 +10,14 @@ export default css`
 		min-height: 56px;
 	}
 
-    @media (min-width: 768px) {
+    /* @media (min-width: 768px) {
         :host {
             grid-column: span 8;
         }
-    }
+    } */
 
 	:host(.boxed) {
+		margin-bottom: 1rem;
 		border: 1px solid var(--accordion-border);
 		border-radius: var(--accordion-border-radius);
 		background-color: var(--accordion-background);

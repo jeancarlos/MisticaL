@@ -1,12 +1,13 @@
 import { PropertyValueMap, html } from 'lit';
-import { ThemeWebComponent } from '../../../theme';
-import { chevronUpRegularSvg } from '../../../../assets/icons'
 import { customElement, property } from 'lit/decorators.js';
-import styles from './styles';
-import '../accordion-asset'
+import { ThemeWebComponent } from '../theme';
+import './accordion-asset'
 
-@customElement('accordion-item-wc')
-export class AccordionItemWC extends ThemeWebComponent {
+import { chevronUpRegularSvg } from '../../assets/icons';
+import styles from './accordion-item.styles';
+
+@customElement('accordion-item')
+export class AccordionItem extends ThemeWebComponent {
   @property({ type: Object })
   asset?: {
     path: string;
@@ -82,6 +83,10 @@ export class AccordionItemWC extends ThemeWebComponent {
   private _toggleAccordion() {
     this.open = !this.open;
     this._updateContentAndChevron();
+
+	if (this.open) {
+		this.dispatchEvent(new CustomEvent('accordion-open', { bubbles: true, composed: true }));
+	}
   }
 
   private _updateContentAndChevron() {
