@@ -2,7 +2,7 @@ import { PropertyValueMap, html } from 'lit';
 import { ThemeWebComponent } from '../../../theme';
 import { chevronUpRegularSvg } from '../../../../assets/icons'
 import { customElement, property } from 'lit/decorators.js';
-import fullWidthStyles from './full-width-styles';
+import styles from './styles';
 import '../accordion-asset'
 
 @customElement('accordion-item-wc')
@@ -31,7 +31,7 @@ export class AccordionItemWC extends ThemeWebComponent {
   @property({ type: Boolean})
   boxed? = false;
 
-  static override styles = [ThemeWebComponent.styles, fullWidthStyles];
+  static override styles = [ThemeWebComponent.styles, styles];
 
   override updated(changedProperties: PropertyValueMap<any>) {
     super.updated(changedProperties);
@@ -41,31 +41,30 @@ export class AccordionItemWC extends ThemeWebComponent {
     }
 
 	if(changedProperties.has('boxed')) {
-		const content = this.shadowRoot?.querySelector('.container') as HTMLElement;
-		content.classList.toggle('boxed', this.boxed);
+		this.classList.toggle('boxed', this.boxed)
 	}
   }
 
   override render() {
     super.render();
     return html`
-    	<div class="container">
-        	<div class="header" @click="${this._toggleAccordion}">
-          		<div class="left-header">
-            		${this.asset && html`<accordion-asset class="asset" .asset=${this.asset}></accordion-asset>`}
-            		<div class="details">
-              			<span class="title">${this.header}</span>
-              			<span class="subtitle">${this.subtitle}</span>
-            		</div>
-          		</div>
-        	<div class="chevron">${chevronUpRegularSvg}</div>
-        </div>
-        <div class="content">
-        	<p>${this.content}</p>
-        	${this.hasSlot ? html`<slot></slot>` : ''}
-        </div>
-		<div class="divider"></div>
-	</div>
+		<section @click="${this._toggleAccordion}">
+			<div class="left-section">
+				${this.asset && html`<accordion-asset class="asset" .asset=${this.asset}></accordion-asset>`}
+				<div class="details">
+					<span class="title">${this.header}</span>
+					<span class="subtitle">${this.subtitle}</span>
+				</div>
+			</div>
+			<div class="chevron">${chevronUpRegularSvg}</div>
+		</section>
+		<div class="content-container">
+			<div class="content">
+				<p>${this.content}</p>
+				${this.hasSlot ? html`<slot></slot>` : ''}
+			</div>
+			<div class="divider"></div>
+		</div>
     `;
   }
 
@@ -83,9 +82,6 @@ export class AccordionItemWC extends ThemeWebComponent {
   private _toggleAccordion() {
     this.open = !this.open;
     this._updateContentAndChevron();
-    if (this.open) {
-      this.dispatchEvent(new CustomEvent('accordion-open', { bubbles: true, composed: true }));
-    }
   }
 
   private _updateContentAndChevron() {
@@ -93,9 +89,8 @@ export class AccordionItemWC extends ThemeWebComponent {
     const chevron = this.shadowRoot?.querySelector('.chevron') as HTMLElement;
 
     if (!content || !chevron) return;
-
-    content.style.maxHeight = this.open ? `${content.scrollHeight}px` : '';
-    content.style.marginTop = this.open ? '1rem' : '';
     chevron.classList.toggle('rotate', this.open);
-  }
+	content.style.margin = this.open ? '0rem 0rem 1rem 0rem' : '0rem 0rem';
+    content.style.height = this.open ? `${content.scrollHeight}px` : '';
+}
 }
