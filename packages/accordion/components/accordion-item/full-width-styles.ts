@@ -4,8 +4,20 @@ export default css`
   .container {
     min-height: 56px;
     border: none;
-    padding: 1rem;
+    padding: 1rem 1rem 0rem 1rem;
     background-color: transparent;
+  }
+
+  .container.boxed {
+	border: 1px solid var(--accordion-border);
+    border-radius: var(--accordion-border-radius);
+    padding: 1rem;
+	margin: 1rem 0;
+    background-color: var(--accordion-background);
+
+	.divider {
+		display: none;
+	}
   }
 
   .container:hover {
@@ -62,15 +74,12 @@ export default css`
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.3s ease-in-out;
-
-    slot {
-      margin-top: 1rem;
-    }
   }
 
   .divider {
     display: block;
     width: 100%;
     border-top: 1px solid var(--accordion-divider);
+	margin-top: 1rem;
   }
 `;

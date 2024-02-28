@@ -1,12 +1,80 @@
 <!DOCTYPE html>
 <html>
+<script type="module" src="/dist/packages/aspect-ratio/index.js"></script>
+<script type="module" src="/dist/packages/spinner/index.js"></script>
+<script type="module" src="/dist/packages/accordion/index.js"></script>
+<script type="module" src="/dist/packages/accordion/components/accordion-item/index.js"></script>
 
 <body>
-  <script type="module" src="/dist/packages/aspect-ratio/index.js"></script>
-  <script type="module" src="/dist/packages/spinner/index.js"></script>
-  <aspect-ratio-web-component>
-    <img src="https://dummyimage.com/600x400/000/fff">
-  </aspect-ratio-web-component>
-  <spinner-web-component size="32" theme-type='light' token-type='vivo'></spinner-web-component>
+	<aspect-ratio-web-component>
+		<img src="https://dummyimage.com/600x400/000/fff">
+	</aspect-ratio-web-component>
+	<spinner-web-component size="32" theme-type='light' token-type='vivo'></spinner-web-component>
+
+	<div
+		style="display: flex; flex-direction: column; align-items: center; width: 100%; height: 100vh; justify-content: center;">
+		<accordion-item-wc
+			header="Title 5"
+			subtitle="Subtitle 5"
+			content="Modernipsum dolor sit amet deformalism new objectivity, video art stuckism international young british artists les nabis, post-impressionism modern art fauvism post-impressionism."
+			asset='{"path": "demo/assets/woman-8402052_1280.jpg", "type": "wide-image"}'
+			token-type="vivo"
+			theme-type="light"
+			boxed
+			>
+
+		</accordion-item-wc>
+		<accordion-wc token-type="vivo" theme-type="light">
+			<accordion-item-wc
+				header="Title 1" subtitle="Subtitle 1"
+				content="Modernipsum dolor sit amet deformalism new objectivity, video art stuckism international young british artists les nabis, post-impressionism modern art fauvism post-impressionism. Primitivism carolingian superstroke futurism lowbrow tonalism, lyrical abstraction synchromism maximalism color field painting renaissance, installation art pop art barbizon school remodernism"
+				asset='{"path": "demo/assets/flash_252851.png", "type": "icon"}'
+				token-type="vivo" theme-type="light">
+			</accordion-item-wc>
+			<accordion-item-wc
+				header="Title 1" subtitle="Subtitle 1"
+				content="Modernipsum dolor sit amet deformalism new objectivity, video art stuckism international young british artists les nabis, post-impressionism modern art fauvism post-impressionism. Primitivism carolingian superstroke futurism lowbrow tonalism, lyrical abstraction synchromism maximalism color field painting renaissance, installation art pop art barbizon school remodernism"
+				asset='{"path": "demo/assets/flash_252851.png", "type": "icon"}'
+				token-type="vivo" theme-type="light">
+			</accordion-item-wc>
+			<accordion-item-wc
+				header="Title 1"
+				subtitle="Subtitle 1"
+				content="Modernipsum dolor sit amet deformalism new objectivity, video art stuckism international young british artists les nabis, post-impressionism modern art fauvism post-impressionism. Primitivism carolingian superstroke futurism lowbrow tonalism, lyrical abstraction synchromism maximalism color field painting renaissance, installation art pop art barbizon school remodernism"
+				asset='{"path": "demo/assets/flash_252851.png", "type": "icon"}'
+				token-type="vivo" theme-type="light">
+		</accordion-item-wc>
+		</accordion-wc>
+
+		<accordion-wc>
+			<accordion-item-wc
+			header="Title 3" subtitle="Subtitle 3"
+			content="Modernipsum dolor sit amet deformalism new objectivity, video art stuckism international young british artists les nabis, post-impressionism modern art fauvism post-impressionism. Primitivism carolingian superstroke futurism lowbrow tonalism, lyrical abstraction synchromism maximalism color field painting renaissance, installation art pop art barbizon school remodernism."
+			asset='{"path": "demo/assets/perfil.jpg", "type": "avatar"}'
+			token-type="vivo"
+			theme-type="light"
+			hasSlot
+			boxed
+			>
+				<div style="display: flex; background-color: greenyellow; width: 100%; height: 50px;"></div>
+			</accordion-item-wc>
+			<accordion-item-wc
+				header="Title 4"
+				content="Modernipsum dolor sit amet deformalism new objectivity, video art stuckism international young british artists les nabis, post-impressionism modern art fauvism post-impressionism."
+				asset='{"path": "demo/assets/clock-8592484_1280.jpg", "type": "square-image"}'
+				token-type="vivo"
+				theme-type="light"
+				boxed
+				>
+			</accordion-item-wc>
+			<accordion-item-wc
+				header="Title 5" subtitle="Subtitle 5"
+				content="Modernipsum dolor sit amet deformalism new objectivity, video art stuckism international young british artists les nabis, post-impressionism modern art fauvism post-impressionism."
+				asset='{"path": "demo/assets/woman-8402052_1280.jpg", "type": "wide-image"}' token-type="vivo"
+				theme-type="light"
+				boxed>
+			</accordion-item-wc>
+		</accordion-wc>
+	</div>
 </body>
 </html>
