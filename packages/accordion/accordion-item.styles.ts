@@ -10,6 +10,7 @@ export default css`
 		min-height: 56px;
 	}
 
+
     /* @media (min-width: 768px) {
         :host {
             grid-column: span 8;
@@ -18,24 +19,42 @@ export default css`
 
 	:host(.boxed) {
 		margin-bottom: 1rem;
-		border: 1px solid var(--accordion-border);
-		border-radius: var(--accordion-border-radius);
-		background-color: var(--accordion-background);
+		border: 1px solid var(--border);
+		border-radius: var(--border-radius);
+		background-color: var(--background-container);
+	}
 
-		.content-container {
-			.divider {
-				display: none;
-			}
-		}
+	:host(.boxed) section {
+		border-radius: var(--border-radius);
+	}
 
+	:host(.boxed) .content-container .divider {
+		display: none;
+	}
+
+	:host(.inverse) {
+		background-color: var(--background-container-brand);
+		border: none;
+	}
+
+	:host(.inverse) section:hover {
+    	background-color: var(--background-container-brand-hover);
+	}
+
+	:host(.inverse) section:active {
+    	background-color: var(--background-container-brand-pressed);
+	}
+
+	:host(.inverse) .content-container .divider {
+		border-top: 1px solid var(--divider-inverse);
 	}
 
 	section:hover {
-		background-color: var(--accordion-background-hover);
+		background-color: var(--background-container-hover);
 	}
 
 	section:active {
-		background-color: var(--accordion-background-pressed);
+		background-color: var(--background-container-pressed);
 	}
 
 	section {
@@ -98,7 +117,7 @@ export default css`
 		.divider {
 			display: block;
 			width: 100%;
-			border-top: 1px solid var(--accordion-divider);
+			border-top: 1px solid var(--divider);
 		}
 
 		slot {

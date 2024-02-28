@@ -32,6 +32,9 @@ export class AccordionItem extends ThemeWebComponent {
   @property({ type: Boolean})
   boxed? = false;
 
+  @property({ type: Boolean })
+  inverse? = false;
+
   static override styles = [ThemeWebComponent.styles, styles];
 
   override updated(changedProperties: PropertyValueMap<any>) {
@@ -43,6 +46,10 @@ export class AccordionItem extends ThemeWebComponent {
 
 	if(changedProperties.has('boxed')) {
 		this.classList.toggle('boxed', this.boxed)
+	}
+
+	if(changedProperties.has('inverse')) {
+		this.classList.toggle('inverse', this.inverse)
 	}
   }
 
@@ -71,12 +78,18 @@ export class AccordionItem extends ThemeWebComponent {
 
   private _loadCssTokens = () => {
     if(this.theme) {
-      this.style.setProperty('--accordion-background', this.theme.componentsColor.backgroundContainer.value)
-      this.style.setProperty('--accordion-background-hover', this.theme.componentsColor.backgroundContainerHover.value)
-      this.style.setProperty('--accordion-background-pressed', this.theme.componentsColor.backgroundContainerPressed.value)
-      this.style.setProperty('--accordion-divider', this.theme.componentsColor.divider.value)
-	  this.style.setProperty('--accordion-border', this.theme.componentsColor.border.value)
-	  this.style.setProperty('--accordion-border-radius', `${this.theme.radius.container.value}px`)
+      this.style.setProperty('--background-container', this.theme.componentsColor.backgroundContainer.value)
+      this.style.setProperty('--background-container-hover', this.theme.componentsColor.backgroundContainerHover.value)
+      this.style.setProperty('--background-container-pressed', this.theme.componentsColor.backgroundContainerPressed.value)
+
+	  this.style.setProperty('--background-container-brand', this.theme.componentsColor.backgroundContainerBrand.value)
+	  this.style.setProperty('--background-container-brand-hover', this.theme.componentsColor.backgroundContainerBrandHover.value)
+	  this.style.setProperty('--background-container-brand-pressed', this.theme.componentsColor.backgroundContainerBrandPressed.value)
+
+      this.style.setProperty('--divider', this.theme.componentsColor.divider.value)
+	  this.style.setProperty('--divider-inverse', this.theme.componentsColor.dividerInverse.value)
+	  this.style.setProperty('--border', this.theme.componentsColor.border.value)
+	  this.style.setProperty('--border-radius', `${this.theme.radius.container.value}px`)
     }
   }
 
