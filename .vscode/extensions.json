@@ -1,8 +1,0 @@
-{
-    "recommendations": [
-        "runem.lit-plugin",
-        "editorconfig.editorconfig",
-        "dbaeumer.vscode-eslint",
-        "esbenp.prettier-vscode"
-    ]
-}
