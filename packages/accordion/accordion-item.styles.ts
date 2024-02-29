@@ -10,7 +10,6 @@ export default css`
 		min-height: 56px;
 	}
 
-
     /* @media (min-width: 768px) {
         :host {
             grid-column: span 8;
@@ -28,12 +27,12 @@ export default css`
 		border-radius: var(--border-radius);
 	}
 
-	:host(.boxed) .content-container .divider {
+	:host(.boxed) .divider {
 		display: none;
 	}
 
-	:host(.inverse) {
-		background-color: var(--background-container-brand);
+	:host(.boxed.inverse) {
+		background-color: var(--background-container-brand-over);
 		border: none;
 	}
 
@@ -45,8 +44,20 @@ export default css`
     	background-color: var(--background-container-brand-pressed);
 	}
 
-	:host(.inverse) .content-container .divider {
+	:host(.inverse) .divider {
 		border-top: 1px solid var(--divider-inverse);
+	}
+
+	:host(.inverse) .title {
+		color: var(--text-primary-inverse);
+	}
+
+	:host(.inverse) .text {
+		color: var(--text-secondary-inverse);
+	}
+
+	:host(.inverse) .chevron svg {
+		filter: invert(1);
 	}
 
 	section:hover {
@@ -78,28 +89,26 @@ export default css`
 			.details {
 				display: flex;
 				flex-direction: column;
-				line-height: 24px;
-
-				.title {
-					font-size: 1rem;
-				}
-
-				.subtitle {
-					font-size: 0.9rem;
-					color: #666;
-				}
 			}
 		}
+	}
 
-		.chevron {
-			display: block;
-			transition: transform 0.3s ease-in-out;
-			scale: 0.7;
-  		}
+	.chevron {
+		display: block;
+		transition: transform 0.3s ease-in-out;
+		scale: 0.7;
+	}
 
-		.chevron.rotate {
-    		transform: rotate(180deg);
-  		}
+	.chevron.rotate {
+		transform: rotate(-180deg);
+	}
+
+	.title {
+		color: var(--text-primary)
+	}
+
+	.text {
+		color: var(--text-secondary)
 	}
 
 	.content-container {
@@ -111,7 +120,6 @@ export default css`
 			overflow: hidden;
 			margin: 0rem 0rem;
 			transition: all 0.3s ease-in-out;
-			line-height: 24px;
 		}
 
 		.divider {

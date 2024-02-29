@@ -16,7 +16,9 @@ export class AccordionGrouped extends ThemeWebComponent {
 		border: 1px solid var(--border);
 		border-radius: var(--border-radius);
 		background-color: transparent;
-	}`];
+		overflow: hidden;
+	}
+	`];
 
 	override async connectedCallback() {
 		super.connectedCallback();
