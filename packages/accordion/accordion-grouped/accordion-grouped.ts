@@ -1,7 +1,7 @@
 import { PropertyValueMap, css } from 'lit';
 import { html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { ThemeWebComponent } from '../theme';
+import { ThemeWebComponent } from '../../theme';
 
 @customElement('accordion-grouped')
 export class AccordionGrouped extends ThemeWebComponent {

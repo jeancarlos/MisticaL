@@ -9,15 +9,16 @@ interface ChangeThemeDTO {
 	themeType?: ThemeType;
 	tokenType?: TokenType;
 }
+
 @customElement('theme-web-component')
 export class ThemeWebComponent extends LitElement {
 	static override styles: CSSResultGroup = styles
 
 	@property({ type: String, attribute: 'theme-type' })
-	themeType!: ThemeType;
+	themeType: ThemeType = ThemeType.Light;
 
 	@property({ type: String, attribute: 'token-type' })
-	tokenType!: TokenType;
+	tokenType: TokenType = TokenType.VivoNew;
 
 	@state()
 	private _theme!: Theme

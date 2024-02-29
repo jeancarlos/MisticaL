@@ -1,39 +1,41 @@
+import { ThemeType } from './../../../tools/theme/types/theme';
 import { PropertyValueMap, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { ThemeWebComponent } from '../theme';
-import './accordion-asset'
-import '../text/'
+import '../accordion-asset';
+import '../../text';
 
-import { chevronDownRegularSvg } from '../../assets/icons';
 import styles from './accordion-item.styles';
+import { ThemeWebComponent } from '../../theme';
+import { chevronDownRegularSvg } from '../../../assets/icons';
 
 @customElement('accordion-item')
 export class AccordionItem extends ThemeWebComponent {
 	@property({ type: Object }) asset?: { path: string; type: string; }
 	@property({ type: String }) header = '';
-	@property({ type: String }) description? = '';
+	@property({ type: String }) description = '';
 	@property({ type: String }) content = '';
+	@property({ type: Boolean }) hasSlot = false;
+	@property({ type: Boolean}) boxed = false;
+	@property({ type: Boolean }) inverse = false;
 	@property({ type: Boolean }) open = false;
-	@property({ type: Boolean }) hasSlot? = false;
-	@property({ type: Boolean}) boxed? = false;
-	@property({ type: Boolean }) inverse? = false;
 
 	static override styles = [ThemeWebComponent.styles, styles];
 
 	override updated(changedProperties: PropertyValueMap<any>) {
 		super.updated(changedProperties);
 
-	if(changedProperties.has('_theme') || changedProperties.has('props')) {
-		this._loadCssTokens()
-	}
+		if(changedProperties.has('_theme') || changedProperties.has('props')) {
+			this._loadCssTokens()
+		}
 
-	if(changedProperties.has('boxed')) {
-		this.classList.toggle('boxed', this.boxed)
-	}
+		if(changedProperties.has('boxed')) {
+			this.classList.toggle('boxed', this.boxed)
+		}
 
-	if(changedProperties.has('inverse')) {
-		this.classList.toggle('inverse', this.inverse)
-	}
+		if(changedProperties.has('inverse')) {
+			this.classList.toggle('inverse', this.inverse)
+			this.changeTheme({ themeType: this.inverse ? ThemeType.Dark : ThemeType.Light } )
+		}
 	}
 
 	override render() {
@@ -106,7 +108,7 @@ export class AccordionItem extends ThemeWebComponent {
 		}
 	}
 
-	private _toggleAccordion() {
+	_toggleAccordion() {
 		this.open = !this.open;
 		this._updateContentAndChevron();
 
