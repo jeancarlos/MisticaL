@@ -12,7 +12,6 @@ export default {
 		header: { control: 'text' },
 		description: { control: 'text' },
 		content: { control: 'text' },
-		boxed: { control: 'boolean' },
 		inverse: { control: 'boolean' },
 		autoCollapse: { control: 'boolean' },
   },
@@ -22,7 +21,6 @@ interface AccordionGroupedArgs {
 	header: string;
 	description: string;
 	content: string;
-	boxed: boolean;
 	inverse: boolean;
 	autoCollapse: boolean;
 }
@@ -31,54 +29,36 @@ interface Globals {
 	theme?: string;
 }
 
+const itemsCount = 3;
+
 const Template: StoryFn<AccordionGroupedArgs & { globals?: Globals }> = (args, { globals }) => html`
 <div style="display: grid">
 	<accordion-grouped
+	theme-type=${ThemeType.Light}
+	token-type=${globals.theme as TokenType}
+	.singleOpen=${args.autoCollapse}
+	>
+	${Array(itemsCount).fill('').map(() => html`
+		<accordion-item
 		theme-type=${ThemeType.Light}
 		token-type=${globals.theme as TokenType}
-		.singleOpen=${args.autoCollapse}
-	>
-		<accordion-item
-			theme-type=${ThemeType.Light}
-			token-type=${globals.theme as TokenType}
-			.asset=${{ path: '/demo/assets/flash_252851.png', type: 'icon' }}
-			.header=${args.header}
-			.description=${args.description}
-			.content=${args.content}
-			.boxed=${args.boxed}
-			.inverse=${args.inverse}
+		.asset=${{ path: '/demo/assets/lightning-regular.svg', type: 'icon' }}
+		.header=${args.header}
+		.description=${args.description}
+		.content=${args.content}
+		.inverse=${args.inverse}
 		></accordion-item>
-		<accordion-item
-			theme-type=${ThemeType.Light}
-			token-type=${globals.theme as TokenType}
-			.asset=${{ path: '/demo/assets/flash_252851.png', type: 'icon' }}
-			.header=${args.header}
-			.description=${args.description}
-			.content=${args.content}
-			.boxed=${args.boxed}
-			.inverse=${args.inverse}
-		></accordion-item>
-		<accordion-item
-			theme-type=${ThemeType.Light}
-			token-type=${globals.theme as TokenType}
-			.asset=${{ path: '/demo/assets/flash_252851.png', type: 'icon' }}
-			.header=${args.header}
-			.description=${args.description}
-			.content=${args.content}
-			.boxed=${args.boxed}
-			.inverse=${args.inverse}
-		></accordion-item>
+	`)}
 	</accordion-grouped>
 </div>
 `;
 
-export const AccordionGroupedWC: StoryFn<AccordionGroupedArgs & {globals: Globals}> = Template.bind({});
+export const AccordionGroupedStories: StoryFn<AccordionGroupedArgs & {globals: Globals}> = Template.bind({});
 
-AccordionGroupedWC.args = {
+AccordionGroupedStories.args = {
 	header: 'Header Example',
 	description: 'Description Example',
 	content: 'Content Example',
-	boxed: false,
 	inverse: false,
 	autoCollapse: false,
 };
