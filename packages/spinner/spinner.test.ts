@@ -1,11 +1,12 @@
 import { html, fixture, expect } from '@open-wc/testing';
 import { SpinnerWebComponent } from '.';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import '.';
 
 const DEFAULT_SIZE = 24;
 
 const setup = async (size?: number) => {
-  const el = await (fixture(html`<spinner-web-component .size?="${size}" theme-type='light' token-type='vivo'></spinner-web-component>`)) as SpinnerWebComponent;
+  const el = await (fixture(html`<spinner-web-component size=${ifDefined(size)} theme-type='light' token-type='vivo'></spinner-web-component>`)) as SpinnerWebComponent;
 
   return el;
 }
