@@ -29,16 +29,16 @@ export class ThemeWebComponent extends LitElement {
 		return this._theme;
 	}
 
-	override async connectedCallback() {
+	override connectedCallback() {
 		super.connectedCallback();
-		const theme = await ThemeService.build(this.tokenType, this.themeType);
+		const theme = ThemeService.build(this.tokenType, this.themeType);
 		this._theme = theme.currentTheme;
 		this._service = theme;
 		this.requestUpdate();
 	}
 
-	async changeTheme({ themeType, tokenType }: ChangeThemeDTO) {
-		const newTheme = await this._service.changeTheme({ themeType, tokenType });
+	changeTheme({ themeType, tokenType }: ChangeThemeDTO) {
+		const newTheme = this._service.changeTheme({ themeType, tokenType });
 		this._theme = newTheme
 		this.requestUpdate();
 	}
