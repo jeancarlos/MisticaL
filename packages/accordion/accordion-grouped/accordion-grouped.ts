@@ -18,6 +18,8 @@ export class AccordionGrouped extends ThemeWebComponent {
 		background-color: transparent;
 		overflow: hidden;
 	}
+
+	
 	`];
 
 	override async connectedCallback() {

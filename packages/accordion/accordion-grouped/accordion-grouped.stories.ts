@@ -13,6 +13,7 @@ export default {
 		description: { control: 'text' },
 		content: { control: 'text' },
 		inverse: { control: 'boolean' },
+		boxed: { control: 'boolean'},
 		hasSlot: { control: 'boolean' },
 		autoCollapse: { control: 'boolean' },
   },
@@ -24,6 +25,7 @@ interface AccordionGroupedArgs {
 	content: string;
 	inverse: boolean;
 	hasSlot: boolean;
+	boxed: boolean;
 	autoCollapse: boolean;
 }
 
@@ -49,6 +51,8 @@ const Template: StoryFn<AccordionGroupedArgs & { globals?: Globals }> = (args, {
 		.description=${args.description}
 		.content=${args.content}
 		.inverse=${args.inverse}
+		.hasSlot=${args.hasSlot}
+		.boxed=${args.boxed}
 		><div style="width: 100%; height: 75px; background: green"></div></accordion-item>
 	`)}
 	</accordion-grouped>
@@ -63,5 +67,6 @@ AccordionGroupedStories.args = {
 	content: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum',
 	inverse: false,
 	hasSlot: false,
+	boxed: false,
 	autoCollapse: false,
 };
