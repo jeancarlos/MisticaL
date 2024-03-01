@@ -6,7 +6,7 @@ import Token, { TokenType } from "../types/token";
 
 interface IThemeService {
   currentTheme: Theme;
-  changeTheme({themeType, tokenType}: ChangeThemeDTO): Promise<Theme>;
+  changeTheme({ themeType, tokenType }: ChangeThemeDTO): Theme;
 }
 
 export class ThemeService implements IThemeService {
@@ -31,21 +31,18 @@ export class ThemeService implements IThemeService {
     };
   }
 
-  static async build(
-    tokenType: TokenType,
-    themeType: ThemeType
-  ): Promise<ThemeService> {
-    const cssTokens = await this.validateAndLoadTokens(tokenType, themeType);
+  static build(tokenType: TokenType, themeType: ThemeType): ThemeService {
+    const cssTokens = this.validateAndLoadTokens(tokenType, themeType);
     return new ThemeService(cssTokens, themeType, tokenType);
   }
 
-  private static async validateAndLoadTokens(tokenType: TokenType, themeType: ThemeType): Promise<Token> {
+  private static validateAndLoadTokens(tokenType: TokenType, themeType: ThemeType): Token {
     if (!Object.values(ThemeType).includes(themeType)) {
       throw new Error(`Invalid theme type. Must be one of ${Object.values(ThemeType).join(', ')}.`);
     }
 
     const loader = TokensRepository.getInstance();
-    const cssTokens = await loader.get(tokenType);
+    const cssTokens = loader.get(tokenType);
 
     if (!cssTokens) {
       throw new Error(`Invalid token type. Must be one of ${Object.values(TokenType).join(', ')}.`);
@@ -54,11 +51,11 @@ export class ThemeService implements IThemeService {
     return cssTokens;
   }
 
-  async changeTheme({ themeType, tokenType }: ChangeThemeDTO): Promise<Theme> {
+  changeTheme({ themeType, tokenType }: ChangeThemeDTO): Theme {
     themeType = themeType || this._currentTheme.themeType;
     tokenType = tokenType || this._currentTheme.tokenType;
 
-    const cssTokens = await ThemeService.validateAndLoadTokens(tokenType, themeType);
+    const cssTokens = ThemeService.validateAndLoadTokens(tokenType, themeType);
     this._currentTheme = this.createTheme(cssTokens, themeType, tokenType);
 
     return this.currentTheme;

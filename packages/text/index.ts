@@ -1,4 +1,4 @@
-import { CSSResultGroup, PropertyValueMap, css, html } from "lit";
+import { PropertyValueMap, css, html } from "lit";
 import { customElement, property } from 'lit/decorators.js';
 import { textPresets } from './presets';
 import { ThemeWebComponent } from '../theme';
@@ -13,9 +13,7 @@ export class TextWebComponent extends ThemeWebComponent {
   @property({ type: Number, reflect: true }) truncate: number | null = null;
   @property({ type: Boolean, reflect: true }) wordBreak = true;
 
-  static override get styles(): CSSResultGroup {
-    return [
-      super.styles,
+  static override styles = [ThemeWebComponent.styles,
       css`
      :host {
         font-size: var(--text-size-mobile);
@@ -44,10 +42,7 @@ export class TextWebComponent extends ThemeWebComponent {
           line-height: var(--text-line-height-desktop);
         }
       }
-    `
-    ];
-
-  }
+    `];
 
   protected override updated(changedProperties: PropertyValueMap<any>) {
     super.updated(changedProperties);

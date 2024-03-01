@@ -4,7 +4,7 @@ export const globalTypes = {
   theme: {
     name: 'Theme',
     description: 'Global theme for components',
-    defaultValue: 'blau',
+    defaultValue: 'vivo-new',
     toolbar: {
       icon: 'circlehollow',
       items: [
