@@ -13,6 +13,7 @@ export default {
 		description: { control: 'text' },
 		content: { control: 'text' },
 		inverse: { control: 'boolean' },
+		hasSlot: { control: 'boolean' },
 		autoCollapse: { control: 'boolean' },
   },
 } as Meta;
@@ -22,6 +23,7 @@ interface AccordionGroupedArgs {
 	description: string;
 	content: string;
 	inverse: boolean;
+	hasSlot: boolean;
 	autoCollapse: boolean;
 }
 
@@ -42,12 +44,12 @@ const Template: StoryFn<AccordionGroupedArgs & { globals?: Globals }> = (args, {
 		<accordion-item
 		theme-type=${ThemeType.Light}
 		token-type=${globals.theme as TokenType}
-		.asset=${{ path: '/demo/assets/lightning-regular.svg', type: 'icon' }}
+		.asset=${{ path: '/demo/assets/lightning-regular.svg', type: 'circle-icon' }}
 		.header=${args.header}
 		.description=${args.description}
 		.content=${args.content}
 		.inverse=${args.inverse}
-		></accordion-item>
+		><div style="width: 100%; height: 75px; background: green"></div></accordion-item>
 	`)}
 	</accordion-grouped>
 </div>
@@ -58,7 +60,8 @@ export const AccordionGroupedStories: StoryFn<AccordionGroupedArgs & {globals: G
 AccordionGroupedStories.args = {
 	header: 'Header Example',
 	description: 'Description Example',
-	content: 'Content Example',
+	content: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum',
 	inverse: false,
+	hasSlot: false,
 	autoCollapse: false,
 };
