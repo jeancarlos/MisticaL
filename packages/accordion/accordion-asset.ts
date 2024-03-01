@@ -25,10 +25,13 @@ export class AccordionAsset extends LitElement {
       display: flex;
       align-items: center;
       justify-content: center;
-    }
-    .circle-icon img {
-      max-width: 100%;
-      max-height: 100%;
+	  background-color: #f4f4f4;
+
+	  img {
+		width: 60%;
+		height: 60%;
+
+	  }
     }
     .square-image {
       width: 64px;

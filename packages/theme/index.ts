@@ -1,51 +1,45 @@
-import { CSSResultGroup, LitElement, css } from 'lit';
+import { CSSResultGroup, LitElement } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { Theme, ThemeType } from '../../tools/theme/types/theme';
 import { TokenType } from '../../tools/theme/types/token';
 import { ThemeService } from '../../tools/theme/services/theme-service';
+import styles from './styles'
 
 interface ChangeThemeDTO {
-  themeType?: ThemeType;
-  tokenType?: TokenType;
+	themeType?: ThemeType;
+	tokenType?: TokenType;
 }
+
 @customElement('theme-web-component')
 export class ThemeWebComponent extends LitElement {
-  @property({ type: String, attribute: 'theme-type' })
-  themeType!: ThemeType;
+	static override styles: CSSResultGroup = styles
 
-  @property({ type: String, attribute: 'token-type' })
-  tokenType!: TokenType;
+	@property({ type: String, attribute: 'theme-type' })
+	themeType: ThemeType = ThemeType.Light;
 
-  @state()
-  private _theme!: Theme
+	@property({ type: String, attribute: 'token-type' })
+	tokenType: TokenType = TokenType.VivoNew;
 
-  private _service!: ThemeService;
+	@state()
+	private _theme!: Theme
 
-  public get theme() {
-    return this._theme;
-  }
+	private _service!: ThemeService;
 
-  static override styles = css`
-  * {
-    display: block;
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Roboto', sans-serif;
-  }
-` as CSSResultGroup;
+	public get theme() {
+		return this._theme;
+	}
 
-  override async connectedCallback() {
-    super.connectedCallback();
-    const theme = await ThemeService.build(this.tokenType, this.themeType);
-    this._theme = theme.currentTheme;
-    this._service = theme;
-    this.requestUpdate();
-  }
+	override async connectedCallback() {
+		super.connectedCallback();
+		const theme = await ThemeService.build(this.tokenType, this.themeType);
+		this._theme = theme.currentTheme;
+		this._service = theme;
+		this.requestUpdate();
+	}
 
-  async changeTheme({ themeType, tokenType }: ChangeThemeDTO) {
-    const newTheme = await this._service.changeTheme({ themeType, tokenType });
-    this._theme = newTheme
-    this.requestUpdate();
-  }
+	async changeTheme({ themeType, tokenType }: ChangeThemeDTO) {
+		const newTheme = await this._service.changeTheme({ themeType, tokenType });
+		this._theme = newTheme
+		this.requestUpdate();
+	}
 }

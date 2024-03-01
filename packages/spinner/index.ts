@@ -1,4 +1,4 @@
-import { PropertyValueMap, css, html } from "lit";
+import { CSSResultGroup, PropertyValueMap, css, html } from "lit";
 import { ThemeWebComponent } from "../theme";
 import { customElement, property } from "lit/decorators.js";
 
@@ -9,7 +9,10 @@ export class SpinnerWebComponent extends ThemeWebComponent {
 
   _borderWidth = this.size / 8;
 
-  static override styles = css`
+  static override get styles(): CSSResultGroup {
+    return [
+      super.styles,
+      css`
     .spinner {
       animation: spin 1s linear infinite;
       border: var(--spinner-border-width) solid #f3f3f3;
@@ -23,7 +26,8 @@ export class SpinnerWebComponent extends ThemeWebComponent {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
-  `;
+  `]
+  }
 
 
   protected override updated(changedProperties: PropertyValueMap<any>) {
