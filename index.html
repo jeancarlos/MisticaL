@@ -1,13 +1,24 @@
 <!DOCTYPE html>
 <html>
 
-<body>
-  <script type="module" src="/dist/packages/aspect-ratio/index.js"></script>
-  <script type="module" src="/dist/packages/spinner/index.js"></script>
-  <aspect-ratio-web-component>
-    <img src="https://dummyimage.com/600x400/000/fff">
-  </aspect-ratio-web-component>
-  <spinner-web-component size="32" theme-type='light' token-type='vivo'></spinner-web-component>
-  <text-web-component theme-type="light" token-type="${themeToken}" preset="text3">Text Example</text-web-component>
-</body>
+  <body>
+    <script type="module" src="/dist/packages/aspect-ratio/index.js"></script>
+    <script type="module" src="/dist/packages/spinner/index.js"></script>
+    <script type="module" src="/dist/packages/spinner/index.js"></script>
+    <script type="module" src="/dist/packages/text/index.js"></script>
+    <script type="module" src="/dist/packages/title/index.js"></script>
+        <script type="module" src="/dist/packages/textLink/index.js"></script>
+    <!-- <aspect-ratio-web-component>
+      <img src="https://dummyimage.com/600x400/000/fff">
+    </aspect-ratio-web-component>
+    <spinner-web-component size="32" theme-type='light'
+      token-type='vivo'></spinner-web-component>
+    <text-web-component theme-type="light" token-type="${themeToken}"
+      preset="text3">Text Example</text-web-component> -->
+    <title-web-component as="h1" titleText="TITLE1" theme-type="light" token-type="vivo"></title-web-component>
+    <title-web-component as="h2" titleText="Title2" theme-type="light" token-type="vivo"></title-web-component>
+    <title-web-component as="h3" titleText="Title3" theme-type="light" token-type="vivo">
+      <!-- <custom-link slot="rightContent" href="https://example.com" linkText="Visite o Example"></custom-link> -->
+    </title-web-component>
+  </body>
 </html>

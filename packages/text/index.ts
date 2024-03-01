@@ -13,11 +13,16 @@ export class TextWebComponent extends ThemeWebComponent {
   @property({ type: Number, reflect: true }) truncate: number | null = null;
   @property({ type: Boolean, reflect: true }) wordBreak = true;
 
+  @property({ type: String }) fontSize: string | null = null;
+  @property({ type: String }) customLineHeight: string | null = null;
+
+  private weightSet = false;
+
   static override get styles(): CSSResultGroup {
     return [
       super.styles,
       css`
-     :host {
+      h1, h2, h3, p, span {
         font-size: var(--text-size-mobile);
         font-weight: var(--text-weight);
         line-height: var(--text-line-height-mobile);
@@ -37,9 +42,12 @@ export class TextWebComponent extends ThemeWebComponent {
         overflow: hidden;
         -webkit-line-clamp: var(--truncate-lines);
       }
+      h1 {
+        text-transform: uppercase;
+      }
 
       @media (min-width: 768px) {
-        :host {
+        h1, h2, h3, p, span  {
           font-size: var(--text-size-desktop);
           line-height: var(--text-line-height-desktop);
         }
@@ -57,20 +65,37 @@ export class TextWebComponent extends ThemeWebComponent {
         this.setFontWeight();
       }
     }
+    if (changedProperties.has('as')) {
+      this.updateStyles();
+      this.setFontWeight();
+    }
+    if (changedProperties.has('weight')) {
+      this.weightSet = true;
+      this.setFontWeight();
+    }
   }
 
   private setFontWeight() {
     const validTextTypes = ['text5', 'text6', 'text7', 'text8', 'text9', 'text10'];
-    let fontWeight = validTextTypes.includes(this.preset) && this.theme?.text?.weight?.[this.preset as keyof typeof this.theme.text.weight]?.value
-      ? this.theme.text.weight[this.preset as keyof typeof this.theme.text.weight].value
-      : this.weight;
-    this.style.setProperty('--text-weight', fontWeight);
+    this.style.setProperty('--text-weight', this.weight);
+    if (!this.weightSet && validTextTypes.includes(this.preset) && this.theme?.text?.weight?.[this.preset as keyof typeof this.theme.text.weight]?.value) {
+
+      this.style.setProperty('--text-weight', this.theme.text.weight[this.preset as keyof typeof this.theme.text.weight].value);
+    }
   }
 
   private updateStyles() {
     const preset = textPresets[this.preset];
-    this.style.setProperty('--text-size-mobile', `${preset.mobileSize}px`);
-    this.style.setProperty('--text-size-desktop', `${preset.desktopSize}px`);
+    let fontSizeMobile = `${preset.mobileSize}px`;
+    let fontSizeDesktop = `${preset.desktopSize}px`;
+    if (this.fontSize) {
+      const [customMobileSize, customDesktopSize] = this.fontSize.split(',');
+      fontSizeMobile = customMobileSize || fontSizeMobile;
+      fontSizeDesktop = customDesktopSize || fontSizeDesktop;
+    }
+
+    this.style.setProperty('--text-size-mobile', fontSizeMobile);
+    this.style.setProperty('--text-size-desktop', fontSizeDesktop);
     this.style.setProperty('--text-line-height-mobile', preset.mobileLineHeight);
     this.style.setProperty('--text-line-height-desktop', preset.desktopLineHeight);
     const truncateValue = this.truncate !== null ? String(this.truncate) : '';
