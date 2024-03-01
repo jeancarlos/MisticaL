@@ -6,7 +6,7 @@ import Token, { TokenType } from "../types/token";
 
 interface IThemeService {
   currentTheme: Theme;
-  changeTheme({themeType, tokenType}: ChangeThemeDTO): Theme;
+  changeTheme({ themeType, tokenType }: ChangeThemeDTO): Theme;
 }
 
 export class ThemeService implements IThemeService {

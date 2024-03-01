@@ -11,7 +11,7 @@ class TokensRepository {
 	private static _instance: TokensRepository;
 	private _tokens: { [key in TokenType]?: Token } = {};
 
-	private constructor() {}
+	private constructor() { }
 
 	static getInstance(): TokensRepository {
 		if (!TokensRepository._instance) {
@@ -27,7 +27,7 @@ class TokensRepository {
 		return this._tokens[key];
 	}
 
-	private load(key: TokenType): Token{
+	private load(key: TokenType): Token {
 		const tokenMap: { [key in TokenType]?: Token } = {
 			[TokenType.Blau]: blau,
 			[TokenType.MovistarLegacy]: movistarLegacy,
@@ -53,11 +53,11 @@ class TokensRepository {
 
 		['dark', 'light'].forEach((themeType) => {
 			for (const key in newTokens[themeType]) {
-			if (newTokens[themeType][key].value.includes('rgba')) {
-				newTokens[themeType][key].value = this.replaceRgbaPaletteValues(newTokens[themeType][key].value, tokens);
-			} else {
-				newTokens[themeType][key].value = this.replaceNormalPaletteValues(newTokens[themeType][key].value, tokens);
-			}
+				if (newTokens[themeType][key].value.includes('rgba')) {
+					newTokens[themeType][key].value = this.replaceRgbaPaletteValues(newTokens[themeType][key].value, tokens);
+				} else {
+					newTokens[themeType][key].value = this.replaceNormalPaletteValues(newTokens[themeType][key].value, tokens);
+				}
 			}
 		});
 

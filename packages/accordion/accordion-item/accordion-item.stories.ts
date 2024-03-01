@@ -1,5 +1,5 @@
 import { html } from 'lit';
-import { Meta, StoryFn} from '@storybook/web-components';
+import { Meta, StoryFn } from '@storybook/web-components';
 import { TokenType } from '../../../tools/theme/types/token';
 import './accordion-item';
 
@@ -16,7 +16,6 @@ export default {
 		hasSlot: { control: 'boolean' },
 	},
 } as Meta;
-
 
 interface AccordionItemArgs {
 	header: string;
@@ -57,7 +56,7 @@ const Template: StoryFn<AccordionItemArgs & { globals?: Globals }> = (args, { gl
 </div>
 `;
 
-export const AccordionItemStories: StoryFn<AccordionItemArgs & {globals: Globals}> = Template.bind({});
+export const AccordionItemStories: StoryFn<AccordionItemArgs & { globals: Globals }> = Template.bind({});
 
 AccordionItemStories.args = {
 	header: 'Header Example',
@@ -65,5 +64,5 @@ AccordionItemStories.args = {
 	content: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum',
 	boxed: false,
 	inverse: false,
-	hasSlot:false,
+	hasSlot: false,
 };

@@ -1,5 +1,5 @@
-import { CSSResultGroup, LitElement } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
+import { CSSResultGroup, LitElement, PropertyValueMap } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
 import { Theme, ThemeType } from '../../tools/theme/types/theme';
 import { TokenType } from '../../tools/theme/types/token';
 import { ThemeService } from '../../tools/theme/services/theme-service';
@@ -20,13 +20,24 @@ export class ThemeWebComponent extends LitElement {
 	@property({ type: String, attribute: 'token-type' })
 	tokenType: TokenType = TokenType.VivoNew;
 
-	@state()
 	private _theme!: Theme
 
 	private _service!: ThemeService;
 
 	public get theme() {
 		return this._theme;
+	}
+
+	override updated(changedProperties: PropertyValueMap<any>) {
+		super.updated(changedProperties)
+
+		if (changedProperties.has('themeType')) {
+			this.changeTheme({ themeType: this.themeType })
+		}
+
+		if (changedProperties.has('tokenType')) {
+			this.changeTheme({ tokenType: this.tokenType })
+		}
 	}
 
 	override connectedCallback() {
@@ -40,6 +51,5 @@ export class ThemeWebComponent extends LitElement {
 	changeTheme({ themeType, tokenType }: ChangeThemeDTO) {
 		const newTheme = this._service.changeTheme({ themeType, tokenType });
 		this._theme = newTheme
-		this.requestUpdate();
 	}
 }
