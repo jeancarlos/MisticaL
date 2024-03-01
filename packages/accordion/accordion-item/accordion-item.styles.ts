@@ -5,7 +5,6 @@ export default css`
 		grid-column: span 12;
 		border: none;
 		background-color: transparent;
-		width: 100%;
 		min-width: 375px;
 		min-height: 56px;
 	}
@@ -17,6 +16,7 @@ export default css`
     } */
 
 	:host(.boxed) {
+		margin: 1rem;
 		margin-bottom: 1rem;
 		border: 1px solid var(--border);
 		border-radius: var(--border-radius);

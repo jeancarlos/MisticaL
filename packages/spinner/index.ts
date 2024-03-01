@@ -40,9 +40,9 @@ export class SpinnerWebComponent extends ThemeWebComponent {
 
   private updateStyles() {
     if (this.theme) {
-      this.style.setProperty('--spinner-color', this.theme.componentsColor.controlActivated.value);
-      this.style.setProperty('--spinner-size', `${this.size}px`);
-      this.style.setProperty('--spinner-border-width', `${this._borderWidth}px`);
+		this.style.setProperty('--spinner-color', this.theme.componentsColor.controlActivated.value);
+		this.style.setProperty('--spinner-size', `${this.size}px`);
+		this.style.setProperty('--spinner-border-width', `${this._borderWidth}px`);
     }
   }
 

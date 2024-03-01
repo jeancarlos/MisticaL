@@ -17,10 +17,7 @@ export class AccordionGrouped extends ThemeWebComponent {
 		border-radius: var(--border-radius);
 		background-color: transparent;
 		overflow: hidden;
-	}
-
-	
-	`];
+	}`];
 
 	override async connectedCallback() {
 		super.connectedCallback();
@@ -39,6 +36,7 @@ export class AccordionGrouped extends ThemeWebComponent {
 		  this._loadCssTokens()
 		}
 	}
+
 
 	override render() {
 		super.render();
