@@ -17,5 +17,3 @@ dist-ssr
 *.sw?
 *install-state.gz
 .yarn
-storybook-static
-.vscode
